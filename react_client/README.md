@@ -1,3 +1,8 @@
+issue : 
+1. Invalid Host header
+https://bytrustu.tistory.com/73
+react_client/node_modules/react-scripts/config/webpackDevServer.config.js에서 disablehostcheck : true, (모든경우에 true로) 바꾸어준다.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
