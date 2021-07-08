@@ -18,13 +18,16 @@ class App extends Component {
 		<div className="black-nav">
 			<h2> 개발 Blog </h2>	
 		</div>
+		<div className="contents_title">
+        	<h1>Contents</h1>
+		</div>
 		<div className="contents">
-        	<h1>Users</h1>
-			
         	{this.state.users.map(user =>
           		<div key={user.id}>
-            		{user.title} <br/>
+            		<h3>{user.title}</h3>
+					
 					{user.date}에 작성
+					👍 {user.thumbs}
 					<hr/>
           		</div>
         	)}
