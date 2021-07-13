@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 
 import Disqus_comment from './components/disqus';
+import Contents_list from './components/contents'
 import './App.css';
 
 //https://electricburglar.tistory.com/105
@@ -28,20 +29,8 @@ class App extends Component {
 		<div className="contents_title">
         	<h1>Contents</h1>
 		</div>
-		<div className="contents">
-        	{this.state.users.map(user =>
-          		<div key={user.id}>
-            		<h3>
-						{user.title} 
-						 👍{user.thumbs}
-					</h3>
-					{user.date}에 작성
-					<hr/>
-          		</div>
-        	)}
-		
+		<Contents_list/>
 		<Disqus_comment />
-		</div>
 	  </div>
 	
     );
