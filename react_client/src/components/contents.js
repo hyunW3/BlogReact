@@ -1,25 +1,63 @@
-import React, {Component} from 'react';
-
-class Contents_list extends Component {
-
-  state = {users: []} // id, titles, date, thumbs 
+import React, {useState, useEffect, Component} from 'react';
 
 
+class ContentsList extends Component {
+  constructor(props){
+	  super(props)
+	  this.state = {
+		 contents : [{
+			 id : "",
+			 title : "",
+			 date : "",
+			 thumbs : "",
+	  	}],
+	  }
+  }
+  thumbs_up = (id) => {
+	  let newArr = [...this.state.contents]
+	  //console.log(newArr)
+	  newArr.map(data =>{
+		  if(data.id === id) {
+			data.thumbs = data.thumbs + 1
+		  }
+	  });
+	  this.setState({newArr})
+	  
+	  
+  }
   componentDidMount() {
     fetch('/titles')
       .then(res => res.json())
-      .then(users => this.setState({users})); // TODO1 : 
+	  .then(res => {
+		res.map((data) => {
+			if (data.id === 1){
+				this.setState({ contents : [data] } )
+			}else {
+				this.setState({
+					contents : [...this.state.contents ,data]
+				})
+				
+			}
+			//console.log(this.state.contents)
+		});
+	  })
+	
   };
+  
 	render(){
+		
 		return(
 			<div className="contents">
-        	{this.state.users.map(user =>
-          		<div key={user.id}>
+			<p>{this.state.contents.title}</p>
+			{this.state.contents.map(content =>
+          		<div key={content.id}>
             		<h3>
-						{user.title} 
-						 👍{user.thumbs}
+						{content.title} 
+						<p onClick={this.thumbs_up.bind(this,content.id)}>
+						 👍{content.thumbs}
+						</p>
 					</h3>
-					{user.date}에 작성
+					{content.date}에 작성
 					<hr/>
           		</div>
         	)}
@@ -28,4 +66,4 @@ class Contents_list extends Component {
 		
 	}
 }
-export default Contents_list;
+export default ContentsList;
