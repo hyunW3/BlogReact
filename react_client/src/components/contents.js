@@ -13,6 +13,7 @@ class ContentsList extends Component {
 	  	}],
 	  }
   }
+// TODO : after update, db API should be called 
   thumbs_up = (id) => {
 	  let newArr = [...this.state.contents]
 	  //console.log(newArr)
