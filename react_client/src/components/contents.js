@@ -27,7 +27,8 @@ class ContentsList extends Component {
 	  
   }
   componentDidMount() {
-    fetch('/titles')
+    //fetch('/titles')
+	fetch('/contents')
       .then(res => res.json())
 	  .then(res => {
 		res.map((data) => {
