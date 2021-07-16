@@ -1,8 +1,9 @@
 
 import React, {Component} from 'react';
 
-import DisqusComment from './components/disqus';
-import ContentsList from './components/contents'
+import DisqusComment from './components/Disqus';
+import ContentsList from './components/Contents';
+import ContentTitle from './components/ContentTitle';
 import './App.css';
 
 //https://electricburglar.tistory.com/105
@@ -17,9 +18,7 @@ class App extends Component {
 		<div className="black-nav">
 			<h2> 개발 Blog </h2>	
 		</div>
-		<div className="contents_title">
-        	<h1>Contents</h1>
-		</div>
+		<ContentTitle />
 		<ContentsList/>
 		<DisqusComment />
 	  </div>
