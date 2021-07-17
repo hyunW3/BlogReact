@@ -1,7 +1,9 @@
 import React from 'react';
 
 class ContentTitle extends React.Component {
-	
+	PostContent = () => {
+		console.log("POST clicked")
+	}
 	render(){
 		const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };
 		return(
@@ -11,7 +13,7 @@ class ContentTitle extends React.Component {
         			<h1 style={{'paddingRight' : '350px',}}>Contents</h1> 
 				</div>
 				<div>
-					<button style={buttonStyle}> + 내용 추가하기 </button>
+					<button style={buttonStyle} onClick={this.PostContent}> POST </button>
 				</div>
 			</div>
 			<hr/>

@@ -14,7 +14,7 @@ class ContentsList extends Component {
 	  }
   }
 // TODO : after update, db API should be called 
-  thumbs_up = (id) => {
+  thumbsUp = (id) => {
 	  let newArr = [...this.state.contents]
 	  //console.log(newArr)
 	  newArr.map(data =>{
@@ -56,7 +56,7 @@ class ContentsList extends Component {
           		<div key={content.id}>
             		<h3>
 						{content.title} 
-						<p onClick={this.thumbs_up.bind(this,content.id)}>
+						<p onClick={this.thumbsUp.bind(this,content.id)}>
 						 👍{content.thumbs}
 						</p>
 					</h3>
