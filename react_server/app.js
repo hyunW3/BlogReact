@@ -1,14 +1,18 @@
 var createError = require('http-errors');
 var express = require('express');
-const mongoose = require('mongoose')
-const db_info = require('./config/mongodb_info.js')
+// 현재 매번 mongoDB atlas 에서 network access바꾸는중
+const mongoose = require('mongoose');
+const db_info = require('./config/mongodb_info.js');
+const contents = require('./schemas/contents')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var titleRouter = require('./routes/titles');
+var contentSchema = require('./schemas/contents')
+
+var contentRouter = require('./routes/content');
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, '../react-client/build'));
@@ -21,8 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../react-client/build')));
 
 //request mapping
-app.use('/', indexRouter);
-app.use('/titles', titleRouter);
+app.use('/contents',contentRouter);
 // db connect
 mongoose.connect(db_info.MongoURI,{
 	useNewUrlParser: true, useUnifiedTopology: true
@@ -31,19 +34,9 @@ mongoose.connect(db_info.MongoURI,{
 
 
 
-const tmp_data = new db_info.Title_DB({
-	id : 3,
-	title : "정인철 밥먹음",
-	date : new Date("<2019-07-14>"),
-	thumbs : 3,
-});
-tmp_data.save()
-	.then(() => {
-	console.log(tmp_data);
-})
-	.catch((err) => {
-	console.log("Error :" + err)
-})
+//RESTful API is not applied (reference is below)
+// https://poiemaweb.com/mongoose
+// https://donghunee.github.io/study/2019/11/12/mongoose
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

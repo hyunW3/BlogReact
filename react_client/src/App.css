@@ -39,8 +39,10 @@ body {
 https://flexbox.help/
 */
 .contents_title {
+	display : flex;
 	padding-left : 60px;
 	text-align : left;
+	align-items : baseline;
 }
 .contents {
 	flex-direction : column;
