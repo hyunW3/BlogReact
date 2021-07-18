@@ -10,9 +10,9 @@ var logger = require('morgan');
 
 var contentSchema = require('./schemas/contents')
 
-var titleRouter = require('./routes/titles');
-var contentRouter = require('./routes/content')
+var contentRouter = require('./routes/content');
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, '../react-client/build'));
@@ -25,7 +25,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../react-client/build')));
 
 //request mapping
-app.use('/titles', titleRouter);
 app.use('/contents',contentRouter);
 // db connect
 mongoose.connect(db_info.MongoURI,{
@@ -38,23 +37,7 @@ mongoose.connect(db_info.MongoURI,{
 //RESTful API is not applied (reference is below)
 // https://poiemaweb.com/mongoose
 // https://donghunee.github.io/study/2019/11/12/mongoose
-// https://edu.goorm.io/learn/lecture/557/%ED%95%9C-%EB%88%88%EC%97%90-%EB%81%9D%EB%82%B4%EB%8A%94-node-js/lesson/373420/%EC%98%A8%EB%9D%BC%EC%9D%B8-%EB%A9%94%EB%AA%A8%EC%9E%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%BD%94%EB%93%9C
-/*
 
-const tmp_data = new contentSchema.contentSchema({
-	id : 3,
-	title : "정인철 밥먹음",
-	date : new Date("<2019-07-14>"),
-	thumbs : 3,
-}); 
-tmp_data.save()
-	.then(() => {
-	console.log(tmp_data);
-})
-	.catch((err) => {
-	console.log("Error :" + err)
-})
-*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
