@@ -21,7 +21,6 @@ class App extends Component {
 			<h2> 개발 Blog </h2>	
 		</div>
 		<div>
-			<Hello/>
 			<Route exact path="/">
 				<ContentTitle />
 				<ContentsList/>
