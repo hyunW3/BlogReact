@@ -4,8 +4,11 @@
 
 # TODO
 - back 쪽 Router 코드
-	- ContentTitle.js에서 props.history를 받아와야할거같은데 안됨.
-- front 쪽 POST 페이지 파트
+- front
+1. /write 에서 POST버튼 클릭시 database로 POST API CALL구현하기 
+
+1.import 하나로 여러개 파일 불러오기   
+2. Array.prototype.map() expects a return value from arrow function warning 해결
 ## 210715 
 - 파일에 따라 코드 분류    
 - https API    
