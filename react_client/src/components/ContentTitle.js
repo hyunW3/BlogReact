@@ -2,9 +2,7 @@ import React from 'react';
 import {  Link } from 'react-router-dom';
 
 class ContentTitle extends React.Component<Props, State> {
-	constructor(props){
-		super(props);
-	}
+
 	
 	render(){
 		const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };

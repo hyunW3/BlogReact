@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route,Switch } from 'react-router-dom';
 
-import DisqusComment from './components/Disqus';
+//import DisqusComment from './components/Disqus';
 import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
 import NotFound from './components/NotFound';
