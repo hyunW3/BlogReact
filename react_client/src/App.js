@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
+import { Route,Switch } from 'react-router-dom';
 
 import DisqusComment from './components/Disqus';
 import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
+import NotFound from './components/NotFound';
 import WriteContent from './route/WriteContent';
 
 import './App.css';
@@ -20,7 +21,7 @@ class App extends Component {
 		<div className="black-nav">
 			<h2> 개발 Blog </h2>	
 		</div>
-		<div>
+		<Switch>
 			<Route exact path="/">
 				<ContentTitle />
 				<ContentsList/>
@@ -28,7 +29,8 @@ class App extends Component {
 			<Route path="/write" >
 				<WriteContent/>
 			</Route>
-		</div>
+			<Route component={NotFound} />
+		</Switch>
 		
 	  </div>
 	

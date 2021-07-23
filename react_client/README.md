@@ -1,6 +1,5 @@
 # TODO
-- Post method를 위해 정보를 입력하는 페이지 작성     
-- Router를 통해 페이지 오가는 것    
+- Post method를 위해 정보를 입력하는 페이지 작성 
 - 정보를 POST하면 DB에 등록    
 참고문헌    
 https://tigger.dev/entry/React-Router%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-%EC%9B%90%ED%95%98%EB%8A%94-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A1%9C-%EC%9D%B4%EB%8F%99%ED%95%98%EA%B8%B0    
@@ -16,4 +15,7 @@ https://junjangsee.tistory.com/entry/Javascript%EB%A1%9C-%EB%9D%BC%EC%9A%B0%ED%8
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+- Done    
+Router를 통해 페이지 오가는 것    
 
