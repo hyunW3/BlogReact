@@ -1,9 +1,11 @@
 import React from 'react';
+import {  Link } from 'react-router-dom';
 
-class ContentTitle extends React.Component {
-	PostContent = () => {
-		console.log("POST clicked")
+class ContentTitle extends React.Component<Props, State> {
+	constructor(props){
+		super(props);
 	}
+	
 	render(){
 		const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };
 		return(
@@ -13,12 +15,15 @@ class ContentTitle extends React.Component {
         			<h1 style={{'paddingRight' : '350px',}}>Contents</h1> 
 				</div>
 				<div>
-					<button style={buttonStyle} onClick={this.PostContent}> POST </button>
+					<Link to='/write'>
+						<button style={buttonStyle}> POST </button>
+					</Link>
 				</div>
 			</div>
 			<hr/>
 		</div>
 		)
 	};
+
 }
 export default ContentTitle;

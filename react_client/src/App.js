@@ -5,7 +5,7 @@ import DisqusComment from './components/Disqus';
 import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
 import WriteContent from './route/WriteContent';
-import Hello from './route/Hello';
+
 import './App.css';
 
 //https://electricburglar.tistory.com/105
@@ -24,7 +24,6 @@ class App extends Component {
 			<Route exact path="/">
 				<ContentTitle />
 				<ContentsList/>
-				<DisqusComment />
 			</Route>
 			<Route path="/write" >
 				<WriteContent/>
