@@ -19,7 +19,7 @@ class ContentsList extends Component {
 	  //console.log(newArr)
 	  newArr.map(data =>{
 		  if(data.id === id) {
-			data.thumbs = data.thumbs + 1
+			data.thumbs = data.thumbs + 1;
 		  }
 	  });
 	  this.setState({newArr})

@@ -4,6 +4,23 @@ import { Link } from 'react-router-dom';
 const WriteContent = () => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
+	const postContent = () => {
+		console.log(title,content);
+		let databody = {
+			"title" : title,
+			"content" : content,
+			"thumbs" : 0
+		}
+		fetch('/contents', {
+			method: 'POST',
+			body: JSON.stringify(databody),
+			headers: {
+				'Content-Type':'application/json'
+			},
+		}).then(res => res.json())
+		.then(data => console.log(data));
+		
+	}
 	return(
 		<div>
 			<h2>WriteContent</h2>
@@ -20,7 +37,7 @@ const WriteContent = () => {
 				<div style={{'margin':'10px'}}>
 					<Link to='/'>
 						<button type="BACK" > BACK </button>
-						<button type="submit" onClick={() => console.log(title,content)}
+						<button type="submit" onClick={postContent}
 							> POST </button>
 					</Link>
 				</div>
