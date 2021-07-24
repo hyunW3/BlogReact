@@ -1,11 +1,17 @@
 const mongoose = require('mongoose')
 // https://velog.io/@ckstn0777/Mongoose-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
 const contentSchema = new mongoose.Schema({
-	id : Number,
+	id : {
+		type : Number
+	},
 	title : {
 		type : String,
 		require : true,
 		trim : true,
+	},
+	content : {
+		type : String,
+		require : true
 	},
 	date : {
 		type : Date,

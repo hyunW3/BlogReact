@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const asyncify = require('express-asyncify');
 // 현재 매번 mongoDB atlas 에서 network access바꾸는중
 const mongoose = require('mongoose');
 const db_info = require('./config/mongodb_info.js');
@@ -11,7 +12,7 @@ var logger = require('morgan');
 var contentSchema = require('./schemas/contents')
 
 var contentRouter = require('./routes/content');
-var app = express();
+var app = asyncify(express());
 
 
 // view engine setup
