@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
+import { Route,Switch } from 'react-router-dom';
 
-import DisqusComment from './components/Disqus';
+//import DisqusComment from './components/Disqus';
 import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
+import NotFound from './components/NotFound';
 import WriteContent from './route/WriteContent';
-import Hello from './route/Hello';
+
 import './App.css';
 
 //https://electricburglar.tistory.com/105
@@ -20,17 +21,16 @@ class App extends Component {
 		<div className="black-nav">
 			<h2> 개발 Blog </h2>	
 		</div>
-		<div>
-			<Hello/>
+		<Switch>
 			<Route exact path="/">
 				<ContentTitle />
 				<ContentsList/>
-				<DisqusComment />
 			</Route>
 			<Route path="/write" >
 				<WriteContent/>
 			</Route>
-		</div>
+			<Route component={NotFound} />
+		</Switch>
 		
 	  </div>
 	
