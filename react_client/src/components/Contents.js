@@ -18,7 +18,7 @@ class ContentsList extends Component {
 	  let newArr = [...this.state.contents]
 	  //console.log(newArr)
 	  newArr.map(data =>{
-		  if(data.id === id) {
+		  if(data._id === id) {
 			data.thumbs = data.thumbs + 1;
 		  }
 	  });
@@ -26,6 +26,7 @@ class ContentsList extends Component {
 	  
 	  
   }
+  componentWillUnmount
   // 비동기 : https://www.daleseo.com/js-async-async-await/
   componentDidMount() {
     //fetch('/titles')
@@ -44,7 +45,6 @@ class ContentsList extends Component {
 			//console.log(this.state.contents)
 		});
 	  })
-	
   };
   
 	render(){
@@ -56,7 +56,7 @@ class ContentsList extends Component {
           		<div key={content.id}>
             		<h3>
 						{content.title} 
-						<p onClick={this.thumbsUp.bind(this,content.id)}>
+						<p onClick={this.thumbsUp.bind(this,content._id)}>
 						 👍{content.thumbs}
 						</p>
 					</h3>
