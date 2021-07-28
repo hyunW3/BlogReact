@@ -34,13 +34,12 @@ class ContentsList extends Component {
       .then(res => res.json()) // promise 문법
 	  .then(res => {
 		res.map((data) => {
-			if (data.id === 1){
+			if (this.state.contents[0].id == ""){
 				this.setState({ contents : [data] } )
 			}else {
 				this.setState({
 					contents : [...this.state.contents ,data]
 				})
-				
 			}
 			//console.log(this.state.contents)
 		});
@@ -53,7 +52,7 @@ class ContentsList extends Component {
 			<div className="contents">
 			<p>{this.state.contents.title}</p>
 			{this.state.contents.map(content =>
-          		<div key={content.id}>
+          		<div key={content._id}>
             		<h3>
 						{content.title} 
 						<p onClick={this.thumbsUp.bind(this,content._id)}>
