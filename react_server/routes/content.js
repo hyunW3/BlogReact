@@ -14,6 +14,18 @@ router.get('/', async(req, res,next) => {
 		console.log("fail to fetch DB",e);
 	}
 })
+router.get('/:id', async(req,res,next) => {
+	//console.log(req.params.id);
+	try {
+		const _id = req.params.id;
+		const content = await contents.contentSchema.find({_id : _id});
+		res.json(content);
+	} catch (e){
+		//console.log('GET fail',e);
+		res.status(500);
+		res.json("Fail to get DB getby"+_id);
+	}
+})
 router.post('/', async(req,res,next) => {
 	console.log(req.body);
 	try { // for MAX
