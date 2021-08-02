@@ -6,7 +6,7 @@ import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
 import NotFound from './components/NotFound';
 import WriteContent from './route/WriteContent';
-
+import ViewContent from './route/ViewContent';
 import './App.css';
 
 //https://electricburglar.tistory.com/105
@@ -28,6 +28,9 @@ class App extends Component {
 			</Route>
 			<Route path="/write" >
 				<WriteContent/>
+			</Route>
+			<Route path="/view/:id">
+				<ViewContent />
 			</Route>
 			<Route component={NotFound} />
 		</Switch>
