@@ -32,7 +32,7 @@ const ViewContent = (props) => {
 		//.then(res => console.log(postData))
 		.catch(err => console.log(err))
 		////onClick={() => console.log(this.postData)}>
-	})
+	},[])
 	return (
 		<div key={postData._id} > 
 			<div> 

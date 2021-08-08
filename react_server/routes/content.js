@@ -25,9 +25,8 @@ router.get('/view/:id', async(req,res,next) => {
 		//console.log(_id)
 		const content = await contents.contentSchema.find({_id : _id});
 		res.json({body :content});
-		console.log(res);
+		//console.log(res);
 	} catch (e){
-		console.log('GET fail',e);
 		res.status(500);
 		console.log("Fail to get DB getbyID "+req.params.id);
 	}
