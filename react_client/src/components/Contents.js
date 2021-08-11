@@ -24,8 +24,12 @@ class ContentsList extends Component {
 	  });
 	  this.setState({newArr});
   }
+  // thumbsUp DB update part(TODO2)  
+  /*
+  componentWillUnmount(){
 	  
-  //componentWillUnmount // thumbsUp DB update part(TODO2)
+  } 
+  */
   // 비동기 : https://www.daleseo.com/js-async-async-await/
   componentDidMount() {
     //fetch('/titles')

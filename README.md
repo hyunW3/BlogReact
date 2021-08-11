@@ -3,7 +3,6 @@
 - 구름은 ip가 계속 바꾸어서 mongoDB Atlas의 allow network 업데이트      
 
 # TODO
-- 글제목 클릭시 글본문 화면을 보여주는 front action(branch -> content_body)
 - thumbs_Up하고 디비에 기록하기
 - 로그인 페이지
 - 백과 프런트 정보 주고받을 때 암호화

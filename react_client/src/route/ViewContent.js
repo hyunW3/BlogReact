@@ -27,7 +27,7 @@ const ViewContent = (props) => {
 				date : data.date
 			  })
 			}
-		) //  {_id, title,content, thumbs, date, __v})
+		) 
 			
 		//.then(res => console.log(postData))
 		.catch(err => console.log(err))
@@ -36,10 +36,13 @@ const ViewContent = (props) => {
 	return (
 		<div key={postData._id} > 
 			<div> 
-				<h2>Title : {postData.title} </h2> 
-				<h3>Content : {postData.content} </h3>
-				<h4>👍 : {postData.thumbs} </h4>
-				<h4>Date : {postData.date} </h4>
+				<div className="viewcontent" >
+					<h2 style={{margin_bottom : '0px'}}>{postData.title}  &nbsp;  👍 : {postData.thumbs} </h2>
+				</div>
+				<h4 style={{margin : '0px'}}>Date : {postData.date} </h4>
+				<hr/>
+				<h3>{postData.content} </h3>
+				
 			</div>
 		</div>
 	);
