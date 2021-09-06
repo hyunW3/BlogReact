@@ -16,7 +16,6 @@ const ViewContent = (props) => {
 		console.log(id)
 		fetch('/contents/view/'+id)
 		.then(res => res.json())
-		//.then(res => console.log(res.body[0].content)) //  {_id, title, 
 		.then((res) => {
 			  let data = res.body[0];
 			console.log(data);
@@ -27,11 +26,7 @@ const ViewContent = (props) => {
 				date : data.date
 			  })
 			}
-		) 
-			
-		//.then(res => console.log(postData))
-		.catch(err => console.log(err))
-		////onClick={() => console.log(this.postData)}>
+		).catch(err => console.log(err))
 	},[])
 	return (
 		<div key={postData._id} > 

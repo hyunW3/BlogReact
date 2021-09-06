@@ -13,10 +13,8 @@ class ContentsList extends Component {
 	  	}],
 	  }
   }
-// TODO2 : after update, db API should be called 
   thumbsUp = (id) => {
 	  let newArr = [...this.state.contents]
-	  //console.log(newArr)
 	  newArr.map(data =>{
 		  if(data._id === id) {
 			data.thumbs = data.thumbs + 1;
@@ -24,17 +22,14 @@ class ContentsList extends Component {
 	  });
 	  this.setState({newArr});
   }
-  // thumbsUp DB update part(TODO2)  
-  /*
+  // TODO2 - thumbsUp DB update part 
+  /*  
   componentWillUnmount(){
 	  
-  } 
-  */
-  // 비동기 : https://www.daleseo.com/js-async-async-await/
+  } */
   componentDidMount() {
-    //fetch('/titles')
 	fetch('/contents')
-      .then(res => res.json()) // promise 문법
+      .then(res => res.json())
 	  .then(res => {
 		res.map((data) => {
 			if (this.state.contents[0].id === ""){
@@ -44,7 +39,6 @@ class ContentsList extends Component {
 					contents : [...this.state.contents ,data]
 				})
 			}
-			//console.log(this.state.contents)
 		});
 	  })
   };
