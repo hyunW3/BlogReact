@@ -1,8 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
-const asyncify = require('express-asyncify');
-// 현재 매번 mongoDB atlas 에서 network access바꾸는중
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 const db_info = require('./config/mongodb_info.js');
 const contents = require('./schemas/contents')
 var path = require('path');
@@ -12,7 +10,7 @@ var logger = require('morgan');
 var contentSchema = require('./schemas/contents')
 
 var contentRouter = require('./routes/content');
-var app = asyncify(express());
+var app = express(); // TODO : asyncify
 
 
 // view engine setup
@@ -35,9 +33,6 @@ mongoose.connect(db_info.MongoURI,{
 
 
 
-//RESTful API is not applied (reference is below)
-// https://poiemaweb.com/mongoose
-// https://donghunee.github.io/study/2019/11/12/mongoose
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

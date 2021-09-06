@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-// https://velog.io/@ckstn0777/Mongoose-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
 const contentSchema = new mongoose.Schema({
 	id : {
 		type : Number
@@ -26,7 +25,7 @@ const contentSchema = new mongoose.Schema({
 		}
 	}
 })
-//CRUD
+
 
 module.exports = {
 	contentSchema : mongoose.model("contents",contentSchema),
