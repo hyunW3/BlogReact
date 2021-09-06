@@ -44,6 +44,12 @@ https://flexbox.help/
 	text-align : left;
 	align-items : baseline;
 }
+.viewcontent {
+	display : flex;
+	justify-content : center;
+	align-items : space-around;
+	margin-top : 0px;
+}
 .contents {
 	flex-direction : column;
 	align-items : stretch; 
@@ -52,6 +58,7 @@ https://flexbox.help/
 	padding-left : 30px;
 	padding-top : 5px;
 }
+
 .App-link {
   color: #61dafb;
 }

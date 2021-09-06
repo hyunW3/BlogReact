@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import { Route,Switch } from 'react-router-dom';
 
-//import DisqusComment from './components/Disqus';
+//import DisqusComment from './components/Disqus'; // because of ADs
 import ContentsList from './components/Contents';
 import ContentTitle from './components/ContentTitle';
 import NotFound from './components/NotFound';
-import WriteContent from './route/WriteContent';
-
+import WriteContent from './components/WriteContent';
+import ViewContent from './components/ViewContent';
 import './App.css';
 
-//https://electricburglar.tistory.com/105
-// https://velog.io/@pkbird/React-Router-1
 class App extends Component {
 
 
@@ -28,6 +26,9 @@ class App extends Component {
 			</Route>
 			<Route path="/write" >
 				<WriteContent/>
+			</Route>
+			<Route path="/view/:id">
+				<ViewContent />
 			</Route>
 			<Route component={NotFound} />
 		</Switch>

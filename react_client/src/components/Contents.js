@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-
+import { Link } from 'react-router-dom';
 
 class ContentsList extends Component {
   constructor(props){
@@ -13,35 +13,32 @@ class ContentsList extends Component {
 	  	}],
 	  }
   }
-// TODO : after update, db API should be called 
   thumbsUp = (id) => {
 	  let newArr = [...this.state.contents]
-	  //console.log(newArr)
 	  newArr.map(data =>{
 		  if(data._id === id) {
 			data.thumbs = data.thumbs + 1;
 		  }
 	  });
-	  this.setState({newArr})
-	  
-	  
+	  this.setState({newArr});
   }
-  componentWillUnmount
-  // 비동기 : https://www.daleseo.com/js-async-async-await/
+  // TODO2 - thumbsUp DB update part 
+  /*  
+  componentWillUnmount(){
+	  
+  } */
   componentDidMount() {
-    //fetch('/titles')
 	fetch('/contents')
-      .then(res => res.json()) // promise 문법
+      .then(res => res.json())
 	  .then(res => {
 		res.map((data) => {
-			if (this.state.contents[0].id == ""){
+			if (this.state.contents[0].id === ""){
 				this.setState({ contents : [data] } )
 			}else {
 				this.setState({
 					contents : [...this.state.contents ,data]
 				})
 			}
-			//console.log(this.state.contents)
 		});
 	  })
   };
@@ -54,7 +51,10 @@ class ContentsList extends Component {
 			{this.state.contents.map(content =>
           		<div key={content._id}>
             		<h3>
-						{content.title} 
+						<Link to =  {"/view/"+content._id } key={content._id} >
+							{content.title} 
+						</Link>
+						
 						<p onClick={this.thumbsUp.bind(this,content._id)}>
 						 👍{content.thumbs}
 						</p>

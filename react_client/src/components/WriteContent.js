@@ -5,7 +5,6 @@ const WriteContent = () => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const postContent = () => {
-		console.log(title,content);
 		let databody = {
 			"title" : title,
 			"content" : content,
@@ -17,8 +16,7 @@ const WriteContent = () => {
 			headers: {
 				'Content-Type':'application/json'
 			},
-		}).then(res => res.json())
-		.then(data => console.log(data));
+		})
 		
 	}
 	return(
