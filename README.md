@@ -1,6 +1,4 @@
-# Make blog using REACT & MongoDB
-# 실행시마다 확인
-- 구름은 ip가 계속 바꾸어서 mongoDB Atlas의 allow network 업데이트      
+# Make blog using REACT & MongoDB   
 
 # TODO
 - thumbs_Up하고 디비에 기록하기
