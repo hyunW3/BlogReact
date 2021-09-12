@@ -6,11 +6,12 @@ class ContentTitle extends React.Component<Props, State> {
 	
 	render(){
 		const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };
+		const titleStyle = {'paddingRight' : '350px',};
 		return(
 		<div>
 			<div className="contents_title">
 				<div>
-        			<h1 style={{'paddingRight' : '350px',}}>Contents</h1> 
+        			<h1 style={titleStyle}>Contents</h1> 
 				</div>
 				<div>
 					<Link to='/write'>
