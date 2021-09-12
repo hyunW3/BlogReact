@@ -10,5 +10,6 @@
 1.import 하나로 여러개 파일 불러오기   
 2. Array.prototype.map() expects a return value from arrow function warning 해결
 
-# 배운 것들 
-- RESTful API
+# ESLint
+npm run checkLint    
+npm run formatLint    
