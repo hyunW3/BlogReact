@@ -11,7 +11,8 @@ const ViewContent = (props) => {
 		
 	});
 	const { id } = useParams();	
-	
+	const viewStyle = {margin_bottom : '0px'};
+	const dataStyle = {margin : '0px'};
 	useEffect(()=> {
 		console.log(id)
 		fetch('/contents/view/'+id)
@@ -32,9 +33,9 @@ const ViewContent = (props) => {
 		<div key={postData._id} > 
 			<div> 
 				<div className="viewcontent" >
-					<h2 style={{margin_bottom : '0px'}}>{postData.title}  &nbsp;  👍 : {postData.thumbs} </h2>
+					<h2 style={viewStyle}>{postData.title}  &nbsp;  👍 : {postData.thumbs} </h2>
 				</div>
-				<h4 style={{margin : '0px'}}>Date : {postData.date} </h4>
+				<h4 style={dataStyle}>Date : {postData.date} </h4>
 				<hr/>
 				<h3>{postData.content} </h3>
 				
