@@ -6,7 +6,7 @@
     "extends": [
         "plugin:react/recommended",
         "airbnb",
-		"plugin:prettier/recommended"
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,7 +20,17 @@
         "prettier"
     ],
     "rules": {
-        "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [
+            "warn",
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ]
     },
-	"ignorePatterns" : ["node_modules/"]
+    "ignorePatterns": [
+        "node_modules/"
+    ]
 }
