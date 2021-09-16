@@ -1,9 +1,10 @@
 // https://www.sanity.io/guides/build-your-first-blog-using-react
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-const ViewContent = (props) => {
+
+const ViewContent = () => {
 	const [postData, setPostData] = useState({
-		_id : '',
+		id : '',
 		title : '',
 		content : '',
 		thumbs : '',
@@ -14,23 +15,23 @@ const ViewContent = (props) => {
 	const viewStyle = {margin_bottom : '0px'};
 	const dataStyle = {margin : '0px'};
 	useEffect(()=> {
-		console.log(id)
-		fetch('/contents/view/'+id)
+		const path = `/contents/view/${id}`
+		fetch(path)
 		.then(res => res.json())
 		.then((res) => {
-			  let data = res.body[0];
-			console.log(data);
-			  setPostData({_id : data._id,
+			  const data = res.body[0];
+			  setPostData({id : data._id,
 			  	title : data.title,
 				content : data.content,
 				thumbs : data.thumbs,
 				date : data.date
 			  })
 			}
-		).catch(err => console.log(err))
+		)
+		// .catch(err => console.log(err))
 	},[])
 	return (
-		<div key={postData._id} > 
+		<div key={postData.id} > 
 			<div> 
 				<div className="viewcontent" >
 					<h2 style={viewStyle}>{postData.title}  &nbsp;  👍 : {postData.thumbs} </h2>

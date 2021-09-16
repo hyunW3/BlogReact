@@ -13,15 +13,7 @@ class ContentsList extends Component {
 	  	}],
 	  }
   }
-  thumbsUp = (id) => {
-	  let newArr = [...this.state.contents]
-	  newArr.map(data =>{
-		  if(data._id === id) {
-			data.thumbs = data.thumbs + 1;
-		  }
-	  });
-	  this.setState({newArr});
-  }
+	
   // TODO2 - thumbsUp DB update part 
   /*  
   componentWillUnmount(){
@@ -31,38 +23,51 @@ class ContentsList extends Component {
 	fetch('/contents')
       .then(res => res.json())
 	  .then(res => {
-		res.map((data) => {
+		res.forEach((data) => {
+			// const { stats } = this.state;
 			if (this.state.contents[0].id === ""){
-				this.setState({ contents : [data] } )
+				this.setState({ contents : [data] } );
 			}else {
-				this.setState({
-					contents : [...this.state.contents ,data]
-				})
+				this.setState(prevState => ({
+					contents : [...prevState.contents, data]
+				}));
 			}
 		});
 	  })
   };
+	
+  thumbsUp = (id) => {
+	const { stats } = this.state;
+	const newArr = [...stats.contents]
+	stats.contents.forEach((data) =>{
+		if(data._id === id) {
+			newArr._id += 1;
+		}
+	});
+	this.setState(newArr); // this.setState({newArr});
+  }
   
 	render(){
-		
+		// const { stats } = this.state;
 		return(
-			<div className="contents">
+			<div className="contents" >
 			<p>{this.state.contents.title}</p>
-			{this.state.contents.map(content =>
+			
+			{this.state.contents.map((content) => (
           		<div key={content._id}>
             		<h3>
-						<Link to =  {"/view/"+content._id } key={content._id} >
+						<Link to =  {`/view/${content._id}` }  >
 							{content.title} 
 						</Link>
 						
-						<p onClick={this.thumbsUp.bind(this,content._id)}>
+						<p onKeyPress={this.thumbsUp.bind(this,content._id)}>
 						 👍{content.thumbs}
 						</p>
 					</h3>
 					{content.date}에 작성
 					<hr/>
           		</div>
-        	)}
+			))};
 			</div>
 		)
 		

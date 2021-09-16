@@ -1,13 +1,12 @@
 import React from 'react';
 import {  Link } from 'react-router-dom';
 
-class ContentTitle extends React.Component<Props, State> {
-
+const ContentTitle = () => {
 	
-	render(){
-		const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };
-		const titleStyle = {'paddingRight' : '350px',};
-		return(
+	const buttonStyle = { color:'black','textAlign':'right','border':'2px solid black' };
+	const titleStyle = {'paddingRight' : '350px',};
+	
+	return(
 		<div>
 			<div className="contents_title">
 				<div>
@@ -15,14 +14,13 @@ class ContentTitle extends React.Component<Props, State> {
 				</div>
 				<div>
 					<Link to='/write'>
-						<button style={buttonStyle}> POST </button>
+						<button style={buttonStyle} type="button"> POST </button>
 					</Link>
 				</div>
 			</div>
 			<hr/>
 		</div>
-		)
-	};
+	);
 
 }
 export default ContentTitle;

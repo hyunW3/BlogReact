@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {DiscussionEmbed} from 'disqus-react';
+
 class DisqusComment extends Component{
 	render(){
 		const disqusShortname = "react-blog-4"
