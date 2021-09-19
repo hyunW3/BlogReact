@@ -24,12 +24,22 @@ class ContentsList extends Component {
       .then(res => res.json())
 	  .then(res => {
 		res.forEach((data) => {
-			// const { stats } = this.state;
 			if (this.state.contents[0].id === ""){
-				this.setState({ contents : [data] } );
+				this.setState({ contents : [{
+			 			id : data._id,
+			 			title : data.title,
+			 			date : data.date,
+			 			thumbs : data.thumbs,
+						}] 
+					});
 			}else {
 				this.setState(prevState => ({
-					contents : [...prevState.contents, data]
+					contents : [...prevState.contents, {
+			 			id : data._id,
+			 			title : data.title,
+			 			date : data.date,
+			 			thumbs : data.thumbs,
+					}]
 				}));
 			}
 		});
@@ -40,27 +50,27 @@ class ContentsList extends Component {
 	const { stats } = this.state;
 	const newArr = [...stats.contents]
 	stats.contents.forEach((data) =>{
-		if(data._id === id) {
-			newArr._id += 1;
+		if(data.id === id) {
+			console.log(data.id)
+			newArr.id += 1;
 		}
 	});
 	this.setState(newArr); // this.setState({newArr});
   }
   
-	render(){
-		// const { stats } = this.state;
+  render(){
 		return(
 			<div className="contents" >
 			<p>{this.state.contents.title}</p>
-			
+			<div className="contentsList">
 			{this.state.contents.map((content) => (
-          		<div key={content._id}>
+          		<div key={content.id}>
             		<h3>
-						<Link to =  {`/view/${content._id}` }  >
+						<Link to =  {`/view/${content.id}` }  >
 							{content.title} 
 						</Link>
 						
-						<p onKeyPress={this.thumbsUp.bind(this,content._id)}>
+						<p onClick={this.thumbsUp}>
 						 👍{content.thumbs}
 						</p>
 					</h3>
@@ -68,6 +78,7 @@ class ContentsList extends Component {
 					<hr/>
           		</div>
 			))};
+			</div>
 			</div>
 		)
 		
