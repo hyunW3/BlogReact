@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 // import DisqusComment from './components/Disqus'; // because of ADs
-import ContentsList from "./components/Contents";
+import ContentsList from "./components/ContentsList";
 import ContentTitle from "./components/ContentTitle";
 import NotFound from "./components/NotFound";
 import WriteContent from "./components/WriteContent";

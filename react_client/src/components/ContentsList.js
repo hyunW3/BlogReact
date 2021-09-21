@@ -46,7 +46,8 @@ class ContentsList extends Component {
   
   componentWillUnmount(){
 	  const { contents } = this.state;
-	console.log("is unmount",contents);  
+	  console.log("is unmount",contents); 
+	  
   } 
 	
   thumbsUp = (targetId) => {
@@ -78,9 +79,9 @@ class ContentsList extends Component {
 							{content.title} 
 						</Link>
 						
-						<p onClick={this.thumbsUp.bind(this,content.id)}>
+						<button type="button" onClick={this.thumbsUp.bind(this,content.id)}>
 						 👍{content.thumbs}
-						</p>
+						</button>
 					</h3>
 					{content.date}에 작성
 					<hr/>
