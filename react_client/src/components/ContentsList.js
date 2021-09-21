@@ -5,12 +5,7 @@ class ContentsList extends Component {
   constructor(props){
 	  super(props)
 	  this.state = {
-		 contents : [{
-			 id : "",
-			 title : "",
-			 date : "",
-			 thumbs : "",
-	  	}],
+		 contents : [ ],
 	  }
   }
 	
@@ -19,46 +14,49 @@ class ContentsList extends Component {
       .then(res => res.json())
 	  .then(res => {
 		res.forEach((data) => {
-			const { contents } = this.state;
-			if (contents[0].id === ""){
-				this.setState({ contents : [{
-			 			id : data._id,
-			 			title : data.title,
-			 			date : data.date,
-			 			thumbs : data.thumbs,
-						}] 
-					});
-			}else {
-				this.setState(prevState => ({
-					contents : [...prevState.contents, {
-			 			id : data._id,
-			 			title : data.title,
-			 			date : data.date,
-			 			thumbs : data.thumbs,
-					}]
-				}));
-			}
+			this.setState(prevState => ({
+				contents : [...prevState.contents, {
+			 		id : data._id,
+			 		title : data.title,
+			 		date : data.date,
+			 		thumbs : data.thumbs,
+					modified : false,
+				}]
+			}));
 		});
 	  })
   };
-	
-  // TODO2 - thumbsUp DB update part 
-  
+	 
   componentWillUnmount(){
-	  const { contents } = this.state;
-	  console.log("is unmount",contents); 
-	  
+	const { contents } = this.state;
+	const updateList = []
+	// console.log("is unmount",contents); 
+	contents.forEach((data) => {
+		if(data.modified === true) {
+			// console.log(data)
+			updateList.push(data)
+		} 
+	});
+	console.log(updateList)
+	  /* // TODO2 - thumbsUp DB update part - request to Backend
+	fetch('/contents:update', {
+		method: 'POST',
+		body: JSON.stringify(updateList),
+		headers: {
+			'Content-Type':'application/json'
+		},
+	})
+	 */
   } 
 	
   thumbsUp = (targetId) => {
 	const { contents } = this.state;
 	const newArr = [];
 	contents.forEach((data) =>{
-		
 		if(data.id === targetId) {
 			const { id, title, date, thumbs} = data;
 			const newThumbs = thumbs+1;
-			newArr.push({ id, title, date,thumbs : newThumbs});
+			newArr.push({ id, title, date,thumbs : newThumbs, modified : true});
 		}else newArr.push(data); 
 		
 	});
