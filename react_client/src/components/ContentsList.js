@@ -37,7 +37,7 @@ class ContentsList extends Component {
 			updateList.push(data)
 		} 
 	});
-	console.log(updateList)
+	// console.log(updateList)
 	  /* // TODO2 - thumbsUp DB update part - request to Backend
 	fetch('/contents:update', {
 		method: 'POST',
