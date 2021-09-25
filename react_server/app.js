@@ -1,17 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-const mongoose = require('mongoose'); 
-const db_info = require('./config/mongodb_info.js');
-const contents = require('./schemas/contents')
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const dbInfo = require('./config/mongodb_info.js');
 
-var contentSchema = require('./schemas/contents')
+const contentRouter = require('./routes/content');
 
-var contentRouter = require('./routes/content');
-var app = express(); // TODO : asyncify
-
+const app = express(); // TODO : asyncify
 
 // view engine setup
 app.set('views', path.join(__dirname, '../react-client/build'));
@@ -23,24 +20,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../react-client/build')));
 
-//request mapping
-app.use('/contents',contentRouter);
+// request mapping
+app.use('/contents', contentRouter);
 // db connect
-mongoose.connect(db_info.MongoURI,{
-	useNewUrlParser: true, useUnifiedTopology: true
-}).then(() => console.log("MongoDB connected... "))
-.catch(error => console.log(error))
-
-
-
+mongoose.connect(dbInfo.MongoURI, {
+  useNewUrlParser: true, useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected... '))
+  .catch((error) => console.log(error));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
