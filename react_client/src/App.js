@@ -1,28 +1,24 @@
-import React, {Component} from 'react';
-import { Route,Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-//import DisqusComment from './components/Disqus'; // because of ADs
-import ContentsList from './components/Contents';
-import ContentTitle from './components/ContentTitle';
-import NotFound from './components/NotFound';
-import WriteContent from './components/WriteContent';
-import ViewContent from './components/ViewContent';
-import './App.css';
+// import DisqusComment from './components/Disqus'; // because of ADs
+import ContentsList from "./components/ContentsList";
+import ContentTitle from "./components/ContentTitle";
+import NotFound from "./components/NotFound";
+import WriteContent from "./components/WriteContent";
+import ViewContent from "./components/ViewContent";
+import "./App.css";
 
-class App extends Component {
-
-
-  render() {
-	
+const App = () => {
     return (
       <div className="App">
 		<div className="black-nav">
 			<h2> 개발 Blog </h2>	
 		</div>
 		<Switch>
-			<Route exact path="/">
+			<Route exact path="/" >
 				<ContentTitle />
-				<ContentsList/>
+				<ContentsList />
 			</Route>
 			<Route path="/write" >
 				<WriteContent/>
@@ -35,8 +31,8 @@ class App extends Component {
 		
 	  </div>
 	
-    );
-  }
+	);
+	
 }
 
 export default App;
