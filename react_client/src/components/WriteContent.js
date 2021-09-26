@@ -5,7 +5,7 @@ const WriteContent = () => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const postContent = () => {
-		let databody = {
+		const databody = {
 			"title" : title,
 			"content" : content,
 			"thumbs" : 0
@@ -37,7 +37,7 @@ const WriteContent = () => {
 					placeholder="이곳에 내용을 입력하세요"/>
 				<div style={buttonStyle}>
 					<Link to='/'>
-						<button type="BACK" > BACK </button>
+						<button type="reset" > BACK </button>
 						<button type="submit" onClick={postContent}
 							> POST </button>
 					</Link>

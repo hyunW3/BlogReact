@@ -1,15 +1,21 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+
 class NotFound extends React.Component {
-	state = {shouldRedirect : false}
-	componentDidMount(){
-		setTimeout( () => this.setState({shouldRedirect : true})
-			,2000);
+	constructor(props){
+		super(props);
+		this.state = {shouldRedirect : false};
 	}
+	
+	componentDidMount(){
+		setTimeout( () => this.setState({shouldRedirect : true}),2000);
+	}
+	
 	render() {
-		if (this.state.shouldRedirect){
-			console.log("NotFound");
-			return <Redirect to={'/'} />
+		const stat = this.state;
+		const isShouldRedirect = stat.shouldRedirect;
+		if (isShouldRedirect){ // NotFound
+			return <Redirect to='/' />
 		}
 		return(
 			<div>
