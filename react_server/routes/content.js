@@ -1,21 +1,19 @@
-const contents = require('../schemas/contents');
+const mongoose = require('mongoose');
 const express = require('express');
+const contents = require('../schemas/contents');
 
 const router = express.Router();
-const mongoose = require('mongoose');
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     const content = await contents.contentSchema.find({});
-    // console.log(content);
     res.json(content);
   } catch (e) {
     res.status(500);
     console.log('fail to fetch DB', e);
   }
 });
-router.get('/view/:id', async (req, res, next) => {
-  // console.log(req.params.id);
+router.get('/view/:id', async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
       const _id = mongoose.Types.ObjectId(req.params.id);
@@ -27,11 +25,11 @@ router.get('/view/:id', async (req, res, next) => {
     }
   }
 });
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   console.log(req.body);
   try { // for MAX
     contents.contentSchema.create(req.body, (err, data) => {
-      if (err) return console.log(err);
+      if (err) { console.log(err); }
       res.send((`saved to db :${data}`));
     });
   } catch (e) {

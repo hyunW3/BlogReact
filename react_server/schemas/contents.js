@@ -19,11 +19,6 @@ const contentSchema = new mongoose.Schema({
   },
   thumbs: {
     type: Number,
-    validate(value) {
-      if (value < 0) {
-        value = 0;
-      }
-    },
   },
 });
 
