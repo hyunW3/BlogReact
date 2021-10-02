@@ -15,7 +15,8 @@ npm run checkLint
 npm run formatLint    
 
 # husky 
-reference : https://typicode.github.io/husky/#/?id=yarn-2
-          https://stackoverflow.com/questions/53869155/how-to-run-husky-pre-commit-in-child-directory-only
+- reference     
+https://typicode.github.io/husky/#/?id=yarn-2     
+https://stackoverflow.com/questions/53869155/how-to-run-husky-pre-commit-in-child-directory-only
 - pre-commit 설정하기    
 root directory 에서 .husky폴더에 pre-commit에서 설정하시면 됩니다.
