@@ -20,7 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "checkLint": "./node_modules/.bin/eslint .",
-    "forceLint": "./node_modules/.bin/eslint . --fix"
+    "forceLint": "./node_modules/.bin/eslint . --fix",
+	"pre-commit" : "./node_modules/.bin/lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -28,16 +29,10 @@
       "react-app/jest"
     ]
   },
-  "lint-staged" : {
-      "*.js" : [
-        "forceLint",
-        "git add"
-      ]
-  },
-  "husky" : {
-	"hooks" : {
-      "pre-commit" : "lint-staged"
-	}
+  "lint-staged": {
+    "src/**/*.{js, jsx}": [
+      "npm run forceLint"
+    ]
   },
   "browserslist": {
     "production": [
@@ -60,7 +55,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^7.0.2",
+    "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.0"
   }
