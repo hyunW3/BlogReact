@@ -13,3 +13,7 @@
 # ESLint
 npm run checkLint    
 npm run formatLint    
+
+# husky 
+- pre-commit 설정하기    
+root directory 에서 .husky폴더에 pre-commit에서 설정하시면 됩니다.
