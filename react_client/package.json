@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "checkLint": "./node_modules/.bin/eslint .",
     "forceLint": "./node_modules/.bin/eslint . --fix",
-	"pre-commit" : "./node_modules/.bin/lint-staged"
+    "pre-commit" : "./node_modules/.bin/lint-staged"
   },
   "eslintConfig": {
     "extends": [
