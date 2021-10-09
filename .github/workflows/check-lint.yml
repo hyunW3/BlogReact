@@ -1,0 +1,27 @@
+name: Check linter of source code
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  Check-Linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Check lint client code
+      run: cd react_client
+    - run: npm install
+    - run: npm run lint
+    - name: Check lint server code
+      run: cd ../react_server
+    - run: npm install
+    - run: npm run lint
