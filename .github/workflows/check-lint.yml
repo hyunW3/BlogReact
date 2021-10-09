@@ -17,11 +17,14 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Check lint client code
-      run: cd react_client
-    - run: npm install
-    - run: npm run lint
-    - name: Check lint server code
-      run: cd ../react_server
-    - run: npm install
-    - run: npm run lint
+    - name: Check linter of client code
+      working-directory: ./react_client
+      run: |
+        npm install
+        npm run lint
+
+    - name: Check linter of server code
+      working-directory: ./react_server
+      run: |
+        npm install
+        npm run lint
