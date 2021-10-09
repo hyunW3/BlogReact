@@ -9,8 +9,8 @@
   },
   "private": true,
   "workspaces": [
-    "react_client",
-    "react_server"
+    "client",
+    "server"
   ],
   "dependencies": {
     "lint-staged": "^11.2.0"
