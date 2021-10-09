@@ -14,10 +14,9 @@
         "sourceType": "module"
     },
     "rules": {
-        "no-underscore-dangle" : ["warn", { 
-            "allow": [ "_id" ]
-        }],
-        "prettier/prettier": ["warn", { "singleQuote": true }]
+        "prettier/prettier": ["warn", { "singleQuote": true }],
+        "no-underscore-dangle" : ["warn", { "allow": [ "_id" ]}],
+        "import/no-unresolved": ["warn", { "caseSensitive": false }]  
     },
     "ignorePatterns": [
         "node_modules/"
