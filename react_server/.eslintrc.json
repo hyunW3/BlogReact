@@ -17,7 +17,7 @@
         "no-underscore-dangle" : ["warn", { 
             "allow": [ "_id" ]
         }],
-        "prettier/prettier": ["error", { "singleQuote": true }]
+        "prettier/prettier": ["warn", { "singleQuote": true }]
     },
     "ignorePatterns": [
         "node_modules/"
