@@ -11,8 +11,8 @@
 2. Array.prototype.map() expects a return value from arrow function warning 해결
 
 # ESLint
-npm run checkLint    
-npm run formatLint    
+npm run lint   
+npm run lint:fix   
 
 # husky 
 - reference     

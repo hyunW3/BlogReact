@@ -27,10 +27,13 @@ router.get('/view/:id', async (req, res) => {
 });
 router.post('/', async (req, res) => {
   console.log(req.body);
-  try { // for MAX
+  try {
+    // for MAX
     contents.contentSchema.create(req.body, (err, data) => {
-      if (err) { console.log(err); }
-      res.send((`saved to db :${data}`));
+      if (err) {
+        console.log(err);
+      }
+      res.send(`saved to db :${data}`);
     });
   } catch (e) {
     res.status(500);
