@@ -13,9 +13,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/contents', contentRouter);
 
 // db connect
-mongoose.connect(dbInfo.MongoURI, {
-  useNewUrlParser: true, useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected... '))
+mongoose
+  .connect(dbInfo.MongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB connected... '))
   .catch((error) => console.log(error));
 
 module.exports = app;
