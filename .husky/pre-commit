@@ -3,4 +3,5 @@
 
 cd ./react_client && npm run pre-commit
 cd ..
-# cd ./react_server && npm run pre-commit
+cd ./react_server && npm run pre-commit
+cd ..

@@ -1,4 +1,7 @@
 {
+    "plugins": [
+        "prettier"
+    ],
     "env": {
         "browser": true,
         "es2021": true
@@ -13,7 +16,8 @@
     "rules": {
         "no-underscore-dangle" : ["warn", { 
             "allow": [ "_id" ]
-        }]
+        }],
+        "prettier/prettier": ["warn", { "singleQuote": true }]
     },
     "ignorePatterns": [
         "node_modules/"

@@ -2,7 +2,7 @@
   "name": "root-directory",
   "version": "0.1.0",
   "devDependencies": {
-    "husky": "^7.0.0"
+    "husky": "^7.0.2"
   },
   "scripts": {
     "prepare": "husky install"
