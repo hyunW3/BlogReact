@@ -7,9 +7,12 @@
   "scripts": {
     "prepare": "husky install"
   },
-  "private" : true,
-  "workspaces" : [
-	"react_client",
-	"react_server"
-  ]
+  "private": true,
+  "workspaces": [
+    "react_client",
+    "react_server"
+  ],
+  "dependencies": {
+    "lint-staged": "^11.2.0"
+  }
 }
