@@ -6,6 +6,10 @@
   },
   "scripts": {
     "prepare": "husky install"
-  }
-
+  },
+  "private" : true,
+  "workspaces" : [
+	"react_client",
+	"react_server"
+  ]
 }
