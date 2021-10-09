@@ -31,7 +31,7 @@
   },
   "lint-staged": {
     "src/**/*.{js, jsx}": [
-      "npm run forceLint"
+      "npm run lint:fix"
     ]
   },
   "browserslist": {
