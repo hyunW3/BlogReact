@@ -26,14 +26,10 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Check linter of client code
-      working-directory: ./react_client
-      run: |
-        npm install
-        npm run lint
+    - name: Install dependencies
+      run: npm install
 
-    - name: Check linter of server code
-      working-directory: ./react_server
+    - name: Check linter
       run: |
-        npm install
-        npm run lint
+        npm run lint --workspace=client
+        npm run lint --workspace=server
