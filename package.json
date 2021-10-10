@@ -1,0 +1,18 @@
+{
+  "name": "root-directory",
+  "version": "0.2.0",
+  "devDependencies": {
+    "husky": "^7.0.2"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "dependencies": {
+    "lint-staged": "^11.2.0"
+  }
+}

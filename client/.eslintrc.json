@@ -1,0 +1,50 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "react/jsx-filename-extension": [
+            "warn",
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+    	"prettier/prettier": "warn",
+		"react/button-has-type": ["warn", {
+  			"button": true,
+  			"submit": true,
+  			"reset": true
+		}],
+		"no-underscore-dangle" : ["warn", { 
+			"allow": [ "_id" ]
+		}],
+		"jsx-a11y/click-events-have-key-events": "warn",
+		"react/destructuring-assignment" : "warn",
+		"jsx-a11y/no-noninteractive-element-interactions" : "warn",
+		"no-unused-vars" : "warn",
+		"spaced-comment" : "warn"
+    },
+    "ignorePatterns": [
+        "node_modules/"
+    ]
+}
