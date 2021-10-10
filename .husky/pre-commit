@@ -1,7 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd ./react_client && npm run pre-commit
-cd ..
-cd ./react_server && npm run pre-commit
-cd ..
+npm run pre-commit --workspaces

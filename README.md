@@ -7,7 +7,7 @@
 - 메뉴 (네비게이션바) 만들기
 
 # thing to solve
-1.import 하나로 여러개 파일 불러오기   
+1. import 하나로 여러개 파일 불러오기   
 2. Array.prototype.map() expects a return value from arrow function warning 해결
 
 # ESLint
@@ -22,7 +22,11 @@ https://stackoverflow.com/questions/53869155/how-to-run-husky-pre-commit-in-chil
 root directory 에서 .husky폴더에 pre-commit에서 설정하시면 됩니다.
 
 # workspace
-- react_client, react_server 폴더에 이는 node_modules 다지우고, 루트 디렉토리에서 npm install 하시면 루트 디렉토리에서 node_modules 폴더가 생성됩니다.     
+- client, server 폴더에 이는 node_modules 다지우고, 루트 디렉토리에서 npm install 하시면 루트 디렉토리에서 node_modules 폴더가 생성됩니다.     
 - client 실행: npm run {cmd} --workspace=client    
 - server 실행 :npm run {cmd} --workspace=server   
 ex) client쪽 린터 실행 npm run lint --workspace=client 
+
+# version
+- node는 v16.11.0을 사용합니다.
+- npm은 최소 v7을 사용합니다. (workspace 를 사용하기 위해)
