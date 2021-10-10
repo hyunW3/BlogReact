@@ -1,12 +1,12 @@
 {
-  "name": "react-server",
+  "name": "server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "babel-node ./bin/www",
-    "lint": "./node_modules/.bin/eslint .",
-    "lint:fix": "./node_modules/.bin/eslint . --fix",
-    "pre-commit" : "./node_modules/.bin/lint-staged"
+    "lint": "../node_modules/.bin/eslint .",
+    "lint:fix": "../node_modules/.bin/eslint . --fix",
+    "pre-commit" : "../node_modules/.bin/lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js, jsx}": [
