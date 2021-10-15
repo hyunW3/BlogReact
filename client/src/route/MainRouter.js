@@ -4,7 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import WriteContent from "../components/WriteContent";
 import ViewContent from "../components/ViewContent";
 import NotFound from "../components/NotFound";
+
 import ContentsView from "./ContentsView";
+import ViewPortfoilo from "../components/ViewPortfoilo";
 
 const MainRouter = () => {
   return (
@@ -17,6 +19,13 @@ const MainRouter = () => {
       </Route>
       <Route path="/view/:id">
         <ViewContent />
+      </Route>
+
+      <Route path="/portfoilo">
+        <ViewPortfoilo />
+      </Route>
+      <Route exact path="/contents">
+        <ContentsView />
       </Route>
       <Route component={NotFound} />
     </Switch>

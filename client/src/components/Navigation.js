@@ -9,7 +9,7 @@ const Navigation = () => {
     fetch("./collectionList")
       .then((res) => res.json())
       .then((res) => res.forEach((data) => newArr.push(data.name)))
-      .then((res) => {
+      .then(() => {
         setCollectionList(newArr);
       });
   }, []);
@@ -19,9 +19,11 @@ const Navigation = () => {
       <h2 className="nav-title"> 개발 Blog </h2>
       <nav className="Category">
         {collectionList.map((data) => (
-          <li className="Category-item" key={data}>
-            {data}{" "}
-          </li>
+          <Link to={data}>
+            <li className="Category-item" key={data}>
+              {data}{" "}
+            </li>
+          </Link>
         ))}
       </nav>
     </div>
