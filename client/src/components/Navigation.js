@@ -19,11 +19,14 @@ const Navigation = () => {
       <h2 className="nav-title"> 개발 Blog </h2>
       <nav className="Category">
         {collectionList.map((data) => (
-          <Link to={data}>
-            <li className="Category-item" key={data}>
-              {data}{" "}
-            </li>
-          </Link>
+          <>
+            <Link to={data}>
+              <li className="Category-item" key={data}>
+                {data}{" "}
+              </li>
+            </Link>
+            <li>|</li>
+          </>
         ))}
       </nav>
     </div>
