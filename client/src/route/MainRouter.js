@@ -27,6 +27,7 @@ const MainRouter = () => {
       <Route exact path="/contents">
         <ContentsView />
       </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
