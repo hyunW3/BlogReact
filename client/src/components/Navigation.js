@@ -8,7 +8,7 @@ const Navigation = () => {
     const newArr = [];
     fetch("./collectionList")
       .then((res) => res.json())
-      .then((res) => res.forEach((data) => newArr.push(data.name)))
+      .then((res) => res.forEach((data) => newArr.push([data._id, data.name])))
       .then(() => {
         setCollectionList(newArr);
       });
@@ -18,11 +18,11 @@ const Navigation = () => {
     <div className="black-nav">
       <h2 className="nav-title"> 개발 Blog </h2>
       <nav className="Category">
-        {collectionList.map((data) => (
+        {collectionList.map(([_id, name]) => (
           <>
-            <Link to={data}>
-              <li className="Category-item" key={data}>
-                {data}{" "}
+            <Link to={name}>
+              <li className="Category-item" key={_id}>
+                {name}{" "}
               </li>
             </Link>
             <li>|</li>
