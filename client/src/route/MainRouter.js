@@ -5,14 +5,14 @@ import WriteContent from "../components/WriteContent";
 import ViewContent from "../components/ViewContent";
 import NotFound from "../components/NotFound";
 
-import ContentsView from "./ContentsView";
-import ViewPortfoilo from "../components/ViewPortfoilo";
+import ViewContents from "./ViewContents";
+import ViewPortfoilo from "./ViewPortfoilo";
 
 const MainRouter = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <ContentsView />
+        <ViewContents />
       </Route>
       <Route path="/write">
         <WriteContent />
@@ -21,11 +21,14 @@ const MainRouter = () => {
         <ViewContent />
       </Route>
 
-      <Route path="/portfoilo">
-        <ViewPortfoilo />
+      <Route path="/Hyunwoong">
+        <ViewPortfoilo person="Hyunwoong" />
+      </Route>
+      <Route path="/Seungjun">
+        <ViewPortfoilo person="Seungjun" />
       </Route>
       <Route exact path="/contents">
-        <ContentsView />
+        <ViewContents />
       </Route>
 
       <Route component={NotFound} />
