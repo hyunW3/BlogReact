@@ -4,6 +4,10 @@ import "../css/Navigation.css";
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   useEffect(() => {
     const newArr = [];
     fetch("./categories")
@@ -16,14 +20,23 @@ const Navigation = () => {
 
   return (
     <div className="black-nav">
-      <h2 className="nav-title"> 개발 Blog </h2>
+      <Link to="/">
+        <h2 className="nav-title"> 개발 Blog </h2>
+      </Link>
       <nav className="category">
-        {categories.map(([id, name]) => (
-          <Link to={name} key={id}>
-            <li className="Category-item">{name} </li>
-            <li>|</li>
-          </Link>
-        ))}
+        <li id="line-wrapper" onClick={toggleMenu}>
+          <div id="line"> </div>
+          <div id="line"> </div>
+          <div id="line"> </div>
+        </li>
+        <li>|</li>
+        {showMenu &&
+          categories.map(([id, name]) => (
+            <Link to={name} key={id}>
+              <li className="Category-item">{name} </li>
+              <li>|</li>
+            </Link>
+          ))}
       </nav>
     </div>
   );
