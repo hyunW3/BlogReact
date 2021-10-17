@@ -6,7 +6,7 @@ import ViewContent from "../components/ViewContent";
 import NotFound from "../components/NotFound";
 
 import ViewContents from "./ViewContents";
-import ViewPortfoilo from "./ViewPortfoilo";
+import ViewPortfoilo from "./ViewPortfolio";
 
 const MainRouter = () => {
   return (

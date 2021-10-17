@@ -24,7 +24,7 @@ const Navigation = () => {
         <h2 className="nav-title"> 개발 Blog </h2>
       </Link>
       <nav className="category">
-        <li id="line-wrapper" onClick={toggleMenu}>
+        <li id="line-wrapper" onClick={toggleMenu} onKeyPress={() => {}}>
           <div id="line"> </div>
           <div id="line"> </div>
           <div id="line"> </div>

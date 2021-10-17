@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../css/ViewPortfoilo.css";
+import "../css/ShowPersonInfo.css";
 
 const ShowPersonInfo = (person) => {
   const [name, setName] = useState("");
