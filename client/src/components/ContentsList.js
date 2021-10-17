@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../css/Contents.css";
 
 class ContentsList extends Component {
   constructor(props) {

@@ -42,7 +42,8 @@
 		"react/destructuring-assignment" : "warn",
 		"jsx-a11y/no-noninteractive-element-interactions" : "warn",
 		"no-unused-vars" : "warn",
-		"spaced-comment" : "warn"
+		"spaced-comment" : "warn",
+        "import/newline-after-import" : "warn"
     },
     "ignorePatterns": [
         "node_modules/"

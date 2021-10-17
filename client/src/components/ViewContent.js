@@ -46,4 +46,3 @@ const ViewContent = () => {
 };
 
 export default ViewContent;
-// https://www.sanity.io/guides/build-your-first-blog-using-react

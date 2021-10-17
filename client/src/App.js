@@ -1,13 +1,12 @@
 import React from "react";
 import MainRouter from "./route/MainRouter";
-import "./App.css";
+import Navigation from "./components/Navigation";
+import "./css/App.css";
 
 const App = () => {
   return (
     <div className="App">
-      <div className="black-nav">
-        <h2> 개발 Blog </h2>
-      </div>
+      <Navigation />
       <MainRouter />
     </div>
   );

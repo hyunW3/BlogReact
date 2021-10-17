@@ -4,13 +4,15 @@ import { Route, Switch } from "react-router-dom";
 import WriteContent from "../components/WriteContent";
 import ViewContent from "../components/ViewContent";
 import NotFound from "../components/NotFound";
-import ContentsView from "./ContentsView";
+
+import ViewContents from "./ViewContents";
+import ViewPortfoilo from "./ViewPortfolio";
 
 const MainRouter = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <ContentsView />
+        <ViewContents />
       </Route>
       <Route path="/write">
         <WriteContent />
@@ -18,6 +20,17 @@ const MainRouter = () => {
       <Route path="/view/:id">
         <ViewContent />
       </Route>
+
+      <Route path="/Hyunwoong">
+        <ViewPortfoilo person="Hyunwoong" />
+      </Route>
+      <Route path="/Seungjun">
+        <ViewPortfoilo person="Seungjun" />
+      </Route>
+      <Route exact path="/contents">
+        <ViewContents />
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
