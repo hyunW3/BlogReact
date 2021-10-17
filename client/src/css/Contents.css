@@ -1,8 +1,7 @@
-
 /*
 https://flexbox.help/
 */
-.contents_title {
+.content-title {
 	display : flex;
 	padding-left : 60px;
 	text-align : left;

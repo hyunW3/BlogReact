@@ -33,7 +33,7 @@ const Navigation = () => {
         {showMenu &&
           categories.map(([id, name]) => (
             <Link to={name} key={id}>
-              <li className="Category-item">{name} </li>
+              <li className="category-item">{name} </li>
               <li>|</li>
             </Link>
           ))}
