@@ -1,48 +1,38 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/Contents.css";
 
-class ContentsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contents: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch("/contents")
+const ContentsList = () => {
+  const [contents, setContents] = useState([]);
+  const fetchData = async () => {
+    const newArr = [];
+    await fetch("/contents")
       .then((res) => res.json())
       .then((res) => {
         res.forEach((data) => {
-          this.setState((prevState) => ({
-            contents: [
-              ...prevState.contents,
-              {
-                id: data._id,
-                title: data.title,
-                date: data.date,
-                thumbs: data.thumbs,
-                modified: false,
-              },
-            ],
-          }));
+          newArr.push({
+            id: data._id,
+            title: data.title,
+            date: data.date,
+            thumbs: data.thumbs,
+            modified: false,
+          });
         });
       });
-  }
+    await setContents(newArr);
+  };
 
-  componentWillUnmount() {
-    const { contents } = this.state;
+  // TODO2 - thumbsUp DB update part - request to Backend
+  const Update = () => {
     const updateList = [];
-    // console.log("is unmount",contents);
     contents.forEach((data) => {
       if (data.modified === true) {
-        // console.log(data)
+        console.log(data);
         updateList.push(data);
       }
     });
-    // console.log(updateList)
-    /* // TODO2 - thumbsUp DB update part - request to Backend
+    console.log("update list : ", updateList);
+    /*
 	fetch('/contents:update', {
 		method: 'POST',
 		body: JSON.stringify(updateList),
@@ -51,10 +41,17 @@ class ContentsList extends Component {
 		},
 	})
 	 */
-  }
+  };
+  useEffect(() => {
+    fetchData();
+    return Update();
+  }, []);
 
-  thumbsUp(targetId) {
-    const { contents } = this.state;
+  const thumbsUp = (event) => {
+    const {
+      target: { value },
+    } = event; // event.target.value
+    const targetId = value;
     const newArr = [];
     contents.forEach((data) => {
       if (data.id === targetId) {
@@ -64,34 +61,27 @@ class ContentsList extends Component {
       } else newArr.push(data);
     });
 
-    this.setState({ contents: newArr });
-  }
+    setContents(newArr);
+  };
 
-  render() {
-    const { contents } = this.state;
-    return (
-      <div className="contents">
-        <p>{contents.title}</p>
-        <div className="contentsList">
-          {contents.map((content) => (
-            <div key={content.id}>
-              <h3>
-                <Link to={`/view/${content.id}`}>{content.title}</Link>
+  return (
+    <div className="contents">
+      <div className="contentsList">
+        {contents.map((content) => (
+          <div key={content.id}>
+            <h3>
+              <Link to={`/view/${content.id}`}>{content.title}</Link>
 
-                <button
-                  type="button"
-                  onClick={this.thumbsUp.bind(this, content.id)}
-                >
-                  👍{content.thumbs}
-                </button>
-              </h3>
-              {content.date}에 작성
-              <hr />
-            </div>
-          ))}
-        </div>
+              <button type="button" value={content.id} onClick={thumbsUp}>
+                👍{content.thumbs}
+              </button>
+            </h3>
+            {content.date}에 작성
+            <hr />
+          </div>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 export default ContentsList;
