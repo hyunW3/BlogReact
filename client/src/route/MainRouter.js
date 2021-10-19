@@ -5,14 +5,14 @@ import WriteContent from "../components/WriteContent";
 import ViewContent from "../components/ViewContent";
 import NotFound from "../components/NotFound";
 
-import ViewContents from "./ViewContents";
+import ViewPage from "./ViewPage";
 import ViewPortfoilo from "./ViewPortfolio";
 
 const MainRouter = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <ViewContents />
+        <ViewPage />
       </Route>
       <Route path="/write">
         <WriteContent />
@@ -28,7 +28,7 @@ const MainRouter = () => {
         <ViewPortfoilo person="Seungjun" />
       </Route>
       <Route exact path="/contents">
-        <ViewContents />
+        <ViewPage />
       </Route>
 
       <Route component={NotFound} />
