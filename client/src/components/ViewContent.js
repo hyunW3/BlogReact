@@ -1,9 +1,9 @@
-// https://www.sanity.io/guides/build-your-first-blog-using-react
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "../css/ViewContent.css";
 
 const ViewContent = () => {
+  const datum = useLocation()?.datum;
   const [postData, setPostData] = useState({
     id: "",
     title: "",
@@ -11,22 +11,15 @@ const ViewContent = () => {
     thumbs: "",
     date: "",
   });
-  const { id } = useParams();
+  const { id } = useParams(); // // const path = `/contents/view/${id}`;
   useEffect(() => {
-    const path = `/contents/view/${id}`;
-    fetch(path)
-      .then((res) => res.json())
-      .then((res) => {
-        const data = res.body[0];
-        setPostData({
-          id: data._id,
-          title: data.title,
-          content: data.content,
-          thumbs: data.thumbs,
-          date: data.date,
-        });
-      });
-    // .catch(err => console.log(err))
+    setPostData({
+      id: datum.id,
+      title: datum.title,
+      content: datum.content,
+      thumbs: datum.thumbs,
+      date: datum.date,
+    });
   }, []);
   return (
     <div key={postData.id}>

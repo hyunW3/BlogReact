@@ -13,6 +13,7 @@ const ContentsList = () => {
           newArr.push({
             id: data._id,
             title: data.title,
+            content: data.content,
             date: data.date,
             thumbs: data.thumbs,
             modified: false,
@@ -53,12 +54,18 @@ const ContentsList = () => {
     const newArr = [];
     contents.forEach((data) => {
       if (data.id === targetId) {
-        const { id, title, date, thumbs } = data;
+        const { id, title, content, date, thumbs } = data;
         const newThumbs = thumbs + 1;
-        newArr.push({ id, title, date, thumbs: newThumbs, modified: true });
+        newArr.push({
+          id,
+          title,
+          content,
+          date,
+          thumbs: newThumbs,
+          modified: true,
+        });
       } else newArr.push(data);
     });
-
     setContents(newArr);
   };
 
@@ -68,7 +75,9 @@ const ContentsList = () => {
         {contents.map((content) => (
           <div key={content.id}>
             <h3>
-              <Link to={`/view/${content.id}`}>{content.title}</Link>
+              <Link to={{ pathname: `/view/${content.id}`, datum: content }}>
+                {content.title}
+              </Link>
 
               <button type="button" value={content.id} onClick={thumbsUp}>
                 👍{content.thumbs}
