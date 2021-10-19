@@ -1,0 +1,14 @@
+.page-title {
+	display : flex;
+	padding-left : 60px;
+	text-align : left;
+	align-items : baseline;
+}
+.button-style {
+    color: black;
+    text-align: right;
+    border: 2px solid black;
+}
+.title-style{
+	padding-right : 300px;
+}

@@ -27,11 +27,9 @@ const ContentsList = () => {
     const updateList = [];
     contents.forEach((data) => {
       if (data.modified === true) {
-        console.log(data);
         updateList.push(data);
       }
     });
-    console.log("update list : ", updateList);
     /*
 	fetch('/contents:update', {
 		method: 'POST',
@@ -44,7 +42,7 @@ const ContentsList = () => {
   };
   useEffect(() => {
     fetchData();
-    return Update();
+    // return Update();
   }, []);
 
   const thumbsUp = (event) => {
