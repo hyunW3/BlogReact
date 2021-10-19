@@ -1,14 +1,14 @@
 import React from "react";
 import ContentsList from "../components/ContentsList";
-import ContentTitle from "../components/ContentTitle";
+import PageTitle from "../components/PageTitle";
 
-const ViewContents = () => {
+const ViewPage = () => {
   return (
     <div>
-      <ContentTitle />
+      <PageTitle />
       <ContentsList />
     </div>
   );
 };
 
-export default ViewContents;
+export default ViewPage;
