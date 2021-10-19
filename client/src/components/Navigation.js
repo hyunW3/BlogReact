@@ -31,12 +31,15 @@ const Navigation = () => {
         </li>
         <li>|</li>
         {showMenu &&
-          categories.map(([id, name]) => (
-            <Link to={name} key={id}>
-              <li className="category-item">{name} </li>
-              <li>|</li>
-            </Link>
-          ))}
+          categories.map(([id, name]) => {
+            const path = `/${name}`;
+            return (
+              <Link to={path} key={id}>
+                <li className="category-item">{name} </li>
+                <li>|</li>
+              </Link>
+            );
+          })}
       </nav>
     </div>
   );
