@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/Navigation.css";
+import FetchCategory from "../api/FetchCategory";
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
@@ -8,14 +9,9 @@ const Navigation = () => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-  useEffect(() => {
-    const newArr = [];
-    fetch("./categories")
-      .then((res) => res.json())
-      .then((res) => res.forEach((data) => newArr.push([data._id, data.name])))
-      .then(() => {
-        setCategories(newArr);
-      });
+  useEffect(async () => {
+    const newArr = await FetchCategory();
+    setCategories(newArr);
   }, []);
 
   return (

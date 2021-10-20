@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../css/ViewContent.css";
 
 const ViewContent = () => {
@@ -11,7 +11,7 @@ const ViewContent = () => {
     thumbs: "",
     date: "",
   });
-  // const { id } = useParams(); // // const path = `/contents/view/${id}`;
+
   useEffect(() => {
     setPostData({
       id: datum.id,

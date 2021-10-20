@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 // import DisqusComment from './components/Disqus'; // because of ADs
 import ViewPortfoilo from "./ViewPortfolio";
 import ViewPage from "./ViewPage";

@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PostContent from "../api/PostContent";
 import "../css/WriteContent.css";
 
 const WriteContent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const postContent = () => {
-    const databody = {
-      title,
-      content,
-      thumbs: 0,
-    };
-    fetch("/contents", {
-      method: "POST",
-      body: JSON.stringify(databody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const requestPost = async () => {
+    await PostContent(title, content);
   };
   return (
     <div>
@@ -41,7 +31,7 @@ const WriteContent = () => {
         <div className="button-style">
           <Link to="/">
             <button type="reset"> BACK </button>
-            <button type="submit" onClick={postContent}>
+            <button type="submit" onClick={requestPost}>
               {" "}
               POST{" "}
             </button>
