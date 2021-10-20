@@ -10,7 +10,7 @@ const ContentTitle = () => {
           <h1 className="title-style">Contents</h1>
         </div>
         <div>
-          <Link to="/write">
+          <Link to="/contents/write">
             <button className="button-style" type="button">
               {" "}
               POST{" "}

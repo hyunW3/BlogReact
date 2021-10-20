@@ -11,7 +11,7 @@ const ViewContent = () => {
     thumbs: "",
     date: "",
   });
-  const { id } = useParams(); // // const path = `/contents/view/${id}`;
+  // const { id } = useParams(); // // const path = `/contents/view/${id}`;
   useEffect(() => {
     setPostData({
       id: datum.id,

@@ -75,7 +75,12 @@ const ContentsList = () => {
         {contents.map((content) => (
           <div key={content.id}>
             <h3>
-              <Link to={{ pathname: `/view/${content.id}`, datum: content }}>
+              <Link
+                to={{
+                  pathname: `/contents/view/${content.id}`,
+                  datum: content,
+                }}
+              >
                 {content.title}
               </Link>
 
