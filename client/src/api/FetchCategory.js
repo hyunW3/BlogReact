@@ -1,5 +1,3 @@
-// ../components/Navigation.js에서 활용합니다.
-
 const FetchCategory = async () => {
   const newArr = [];
   await fetch("./categories")

@@ -1,5 +1,3 @@
-// ../components/WriteContent.js에서 활용합니다.
-
 const PostContent = async (title, content) => {
   const databody = {
     title,

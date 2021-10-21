@@ -1,4 +1,3 @@
-// ../components/PageContentsList.js에서 사용합니다.
 const FetchContent = async () => {
   const newArr = [];
   await fetch("/contents")
