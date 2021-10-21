@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/Navigation.css";
+import HamburgerButton from "./HamburgerButton";
+import CategoryItem from "./CategoryItem";
 import FetchCategory from "../api/FetchCategory";
+import "../css/Navigation.css";
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const toggleMenu = () => {
+    console.log("toggleMenu");
     setShowMenu(!showMenu);
   };
   useEffect(async () => {
@@ -20,10 +23,14 @@ const Navigation = () => {
         <h2 className="nav-title"> 개발 Blog </h2>
       </Link>
       <nav className="category">
-        <li id="line-wrapper" onClick={toggleMenu} onKeyPress={() => {}}>
-          <div id="line"> </div>
-          <div id="line"> </div>
-          <div id="line"> </div>
+        <li
+          className="line-wrapper"
+          onClick={toggleMenu}
+          onKeyPress={() => {
+            console.log("onKeyPress");
+          }}
+        >
+          <HamburgerButton />
         </li>
         <li>|</li>
         {showMenu &&
@@ -31,6 +38,7 @@ const Navigation = () => {
             const path = `/${name}`;
             return (
               <Link to={path} key={id}>
+                <CategoryItem id={id} name={name} />
                 <li className="category-item">{name} </li>
                 <li>|</li>
               </Link>

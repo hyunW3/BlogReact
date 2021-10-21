@@ -21,14 +21,14 @@
 	float : left;
 	color : white;
 	font-size : 18px;
-	height : 18px;
 	vertical-align : middle;
 	text-align : center;
-	padding : 10px 10px 15px 10px;
+	/* padding : 10px 10px 15px 10px; */
 }
 .category-item {
 	display : block;
 	width : 120px;
+	padding : 5px 10px 10px 10px;
 }
 .category-item:hover {
 	color : red;
@@ -37,8 +37,8 @@
 .line-wrapper {
   cursor:pointer;
   width:25px;
-  height:25px;
-	padding : 15px 5px 0px 5px;
+  height:20px;
+	padding : 10px 15px 10px 10px;
 }
 #line {
   background: white; /*#ffffff */
