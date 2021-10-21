@@ -23,26 +23,13 @@ const Navigation = () => {
         <h2 className="nav-title"> 개발 Blog </h2>
       </Link>
       <nav className="category">
-        <li
-          className="line-wrapper"
-          onClick={toggleMenu}
-          onKeyPress={() => {
-            console.log("onKeyPress");
-          }}
-        >
+        <li className="line-wrapper" onClick={toggleMenu} onKeyPress={() => {}}>
           <HamburgerButton />
         </li>
         <li>|</li>
         {showMenu &&
           categories.map(([id, name]) => {
-            const path = `/${name}`;
-            return (
-              <Link to={path} key={id}>
-                <CategoryItem id={id} name={name} />
-                <li className="category-item">{name} </li>
-                <li>|</li>
-              </Link>
-            );
+            return <CategoryItem key={id} name={name} />;
           })}
       </nav>
     </div>

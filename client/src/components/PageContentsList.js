@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FetchContent from "../api/FetchContent";
-import PostContent from "../api/PostContent"; // debug
 import "../css/Contents.css";
 
 const ContentsList = () => {
