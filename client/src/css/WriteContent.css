@@ -1,0 +1,12 @@
+.title-style { 
+	padding : 0px;
+	width: 80%;
+}
+.content-style { 
+	width: 80%;
+	height: 450px;
+}
+.button-style { 
+	margin: 10px; 
+	text-align : center;
+}

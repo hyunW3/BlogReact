@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import HamburgerButton from "./HamburgerButton";
+import CategoryItem from "./CategoryItem";
+import FetchCategory from "../api/FetchCategory";
 import "../css/Navigation.css";
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const toggleMenu = () => {
+    console.log("toggleMenu");
     setShowMenu(!showMenu);
   };
-  useEffect(() => {
-    const newArr = [];
-    fetch("./categories")
-      .then((res) => res.json())
-      .then((res) => res.forEach((data) => newArr.push([data._id, data.name])))
-      .then(() => {
-        setCategories(newArr);
-      });
+  useEffect(async () => {
+    const newArr = await FetchCategory();
+    setCategories(newArr);
   }, []);
 
   return (
@@ -24,19 +23,14 @@ const Navigation = () => {
         <h2 className="nav-title"> 개발 Blog </h2>
       </Link>
       <nav className="category">
-        <li id="line-wrapper" onClick={toggleMenu} onKeyPress={() => {}}>
-          <div id="line"> </div>
-          <div id="line"> </div>
-          <div id="line"> </div>
+        <li className="line-wrapper" onClick={toggleMenu} onKeyPress={() => {}}>
+          <HamburgerButton />
         </li>
         <li>|</li>
         {showMenu &&
-          categories.map(([id, name]) => (
-            <Link to={name} key={id}>
-              <li className="category-item">{name} </li>
-              <li>|</li>
-            </Link>
-          ))}
+          categories.map(([id, name]) => {
+            return <CategoryItem key={id} name={name} />;
+          })}
       </nav>
     </div>
   );

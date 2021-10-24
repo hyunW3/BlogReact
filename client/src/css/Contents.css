@@ -1,13 +1,8 @@
 /*
 https://flexbox.help/
 */
-.content-title {
-	display : flex;
-	padding-left : 60px;
-	text-align : left;
-	align-items : baseline;
-}
-.viewcontent {
+
+.view-content {
 	display : flex;
 	justify-content : center;
 	align-items : space-around;

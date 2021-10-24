@@ -1,33 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PostContent from "../api/PostContent";
+import "../css/WriteContent.css";
 
 const WriteContent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const postContent = () => {
-    const databody = {
-      title,
-      content,
-      thumbs: 0,
-    };
-    fetch("/contents", {
-      method: "POST",
-      body: JSON.stringify(databody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const requestPost = async () => {
+    await PostContent(title, content);
   };
-  const titleStyle = { width: "80%" };
-  const contentStyle = { width: "80%", height: "450px" };
-  const buttonStyle = { margin: "10px" };
   return (
     <div>
       <h2>WriteContent</h2>
       <form>
         <input
           type="title"
-          style={titleStyle}
+          className="title-style"
           value={title}
           onChange={({ target: { value } }) => setTitle(value)}
           placeholder="이곳에 제목을 입력하세요"
@@ -35,15 +23,15 @@ const WriteContent = () => {
         <br />
         <input
           type="content"
-          style={contentStyle}
+          className="content-style"
           value={content}
           onChange={({ target: { value } }) => setContent(value)}
           placeholder="이곳에 내용을 입력하세요"
         />
-        <div style={buttonStyle}>
+        <div className="button-style">
           <Link to="/">
             <button type="reset"> BACK </button>
-            <button type="submit" onClick={postContent}>
+            <button type="submit" onClick={requestPost}>
               {" "}
               POST{" "}
             </button>
