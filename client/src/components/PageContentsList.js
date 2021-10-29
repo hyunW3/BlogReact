@@ -43,20 +43,20 @@ const ContentsList = () => {
       target: { value },
     } = event; // event.target.value
     const targetId = value;
-    const newArr = [];
-    contents.forEach((data) => {
+    const newArr = contents.map((data) => {
       if (data.id === targetId) {
         const { id, title, content, date, thumbs } = data;
 
-        newArr.push({
+        return {
           id,
           title,
           content,
           date,
           thumbs: thumbs + 1,
           modified: true,
-        });
-      } else newArr.push(data);
+        };
+      } // else
+      return data;
     });
     setContents(newArr);
   };
