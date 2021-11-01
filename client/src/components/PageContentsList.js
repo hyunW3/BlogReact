@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import FetchContent from "../api/FetchContent";
 import "../css/Contents.css";
 
-const ContentsList = () => {
+const PageContentsList = () => {
   const [contents, setContents] = useState([]);
+  const latestContents = useRef(contents);
   const fetchData = async () => {
     const newArr = await FetchContent();
     setContents(newArr);
   };
-
   // TODO2 - thumbsUp DB update part - request to Backend
   const Update = () => {
-    console.log(contents);
+    // useRef 써라
+    // console.log(latestContents.current);
+
     const updateList = [];
-    contents.forEach((data) => {
+    latestContents.current.forEach((data) => {
       if (data.modified === true) {
         updateList.push(data);
       }
@@ -46,7 +48,6 @@ const ContentsList = () => {
     const newArr = contents.map((data) => {
       if (data.id === targetId) {
         const { id, title, content, date, thumbs } = data;
-
         return {
           id,
           title,
@@ -58,6 +59,7 @@ const ContentsList = () => {
       } // else
       return data;
     });
+    latestContents.current = newArr;
     setContents(newArr);
   };
 
@@ -89,4 +91,4 @@ const ContentsList = () => {
     </div>
   );
 };
-export default ContentsList;
+export default PageContentsList;
