@@ -5,35 +5,33 @@ import "../css/Contents.css";
 
 const PageContentsList = () => {
   const [contents, setContents] = useState([]);
-  const latestContents = useRef(contents);
+  const latestContents = useRef();
   const fetchData = async () => {
     const newArr = await FetchContent();
     setContents(newArr);
   };
   // TODO2 - thumbsUp DB update part - request to Backend
-  const Update = () => {
-    // useRef 써라
-    // console.log(latestContents.current);
-
+  const Update = async () => {
     const updateList = [];
     latestContents.current.forEach((data) => {
       if (data.modified === true) {
-        updateList.push(data);
+        updateList.push({ _id: data.id, thumbs: data.thumbs });
       }
     });
 
     // setstate async problem -> Mobx?
     // https://techblog.woowahan.com/2599/
     console.log("unmount!", updateList);
-    /*
-	fetch('/contents:update', {
-		method: 'POST',
-		body: JSON.stringify(updateList),
-		headers: {
-			'Content-Type':'application/json'
-		},
-	})
-	 */
+    if (updateList.length > 0) {
+      await fetch("/contents/update", {
+        method: "POST",
+        body: JSON.stringify(updateList),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("updateList!");
+    }
   };
   useEffect(() => {
     fetchData();
