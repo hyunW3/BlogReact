@@ -41,4 +41,15 @@ router.post('/', async (req, res) => {
   }
 });
 
+// https://www.geeksforgeeks.org/mongodb-updatemany-method-db-collection-updatemany/?ref=rp
+router.post('/update', async(req, res) => {
+	const updateIdList = req.body.map((data) => ( {_id : data._id} ))
+	const updateThumbList = req.body.map((data) => ( {thumbs : data.thumbs}))
+	
+	for (var i =0; i<updateIdList.length; ++i){
+		const returnVal = await contents.contentSchema.updateOne(updateIdList[i],{$set : updateThumbList[i]})
+	}
+	await res.status(200);
+});
+
 module.exports = router;
