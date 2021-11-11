@@ -9,7 +9,6 @@ const Navigation = () => {
   const [categories, setCategories] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
   const toggleMenu = () => {
-    console.log("toggleMenu");
     setShowMenu(!showMenu);
   };
   useEffect(async () => {
