@@ -10,9 +10,10 @@ const PageContentsList = () => {
     const newArr = await FetchContent();
     setContents(newArr);
   };
-  // TODO2 - thumbsUp DB update part - request to Backend
+
   const Update = async () => {
     const updateList = [];
+    if (latestContents.current === undefined) return; // nothing to update
     latestContents.current.forEach((data) => {
       if (data.modified === true) {
         updateList.push({ _id: data.id, thumbs: data.thumbs });
@@ -21,16 +22,14 @@ const PageContentsList = () => {
 
     // setstate async problem -> Mobx?
     // https://techblog.woowahan.com/2599/
-    console.log("unmount!", updateList);
     if (updateList.length > 0) {
       await fetch("/contents/update", {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify(updateList),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log("updateList!");
     }
   };
   useEffect(() => {
