@@ -42,17 +42,16 @@ router.post('/', async (req, res) => {
 });
 
 // https://www.geeksforgeeks.org/mongodb-updatemany-method-db-collection-updatemany/?ref=rp
-router.post('/update', async (req, res) => {
-  const updateIdList = req.body.map((data) => ({ _id: data._id }));
-  const updateThumbList = req.body.map((data) => ({ thumbs: data.thumbs }));
-
-  for (let i = 0; i < updateIdList.length; i += 1) {
-    contents.contentSchema.updateOne(updateIdList[i], {
-      $set: updateThumbList[i],
+router.patch('/update', async (req, res) => {
+  // 문제 : 식별자(정확한 주소) 명시 안함
+  req.body.forEach(async (data) => {
+    const updateId = { _id: data._id };
+    const thumbCount = { thumbs: data.thumbs };
+    await contents.contentSchema.updateOne(updateId, {
+      $set: thumbCount,
     });
-  }
-  await Promise.all(contents.contentSchema);
-  await res.status(200);
+  });
+  res.status(200);
 });
 
 module.exports = router;
