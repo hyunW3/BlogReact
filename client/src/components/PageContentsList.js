@@ -1,37 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import FetchContent from "../api/FetchContent";
 import "../css/Contents.css";
 
-const ContentsList = () => {
+const PageContentsList = () => {
   const [contents, setContents] = useState([]);
+  const latestContents = useRef();
   const fetchData = async () => {
     const newArr = await FetchContent();
     setContents(newArr);
   };
 
-  // TODO2 - thumbsUp DB update part - request to Backend
-  const Update = () => {
-    console.log(contents);
+  const Update = async () => {
     const updateList = [];
-    contents.forEach((data) => {
+    if (latestContents.current === undefined) return; // nothing to update
+    latestContents.current.forEach((data) => {
       if (data.modified === true) {
-        updateList.push(data);
+        updateList.push({ _id: data.id, thumbs: data.thumbs });
       }
     });
 
     // setstate async problem -> Mobx?
     // https://techblog.woowahan.com/2599/
-    console.log("unmount!", updateList);
-    /*
-	fetch('/contents:update', {
-		method: 'POST',
-		body: JSON.stringify(updateList),
-		headers: {
-			'Content-Type':'application/json'
-		},
-	})
-	 */
+    if (updateList.length > 0) {
+      await fetch("/contents/update", {
+        method: "PATCH",
+        body: JSON.stringify(updateList),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
   };
   useEffect(() => {
     fetchData();
@@ -46,7 +45,6 @@ const ContentsList = () => {
     const newArr = contents.map((data) => {
       if (data.id === targetId) {
         const { id, title, content, date, thumbs } = data;
-
         return {
           id,
           title,
@@ -58,6 +56,7 @@ const ContentsList = () => {
       } // else
       return data;
     });
+    latestContents.current = newArr;
     setContents(newArr);
   };
 
@@ -89,4 +88,4 @@ const ContentsList = () => {
     </div>
   );
 };
-export default ContentsList;
+export default PageContentsList;

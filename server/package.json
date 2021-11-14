@@ -9,7 +9,7 @@
     "pre-commit" : "../node_modules/.bin/lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js, jsx}": [
+    "./**/*.{js, jsx}": [
       "npm run lint:fix"
     ]
   },

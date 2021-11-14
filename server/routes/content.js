@@ -41,4 +41,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+// https://www.geeksforgeeks.org/mongodb-updatemany-method-db-collection-updatemany/?ref=rp
+router.patch('/update', async (req, res) => {
+  // 문제 : 식별자(정확한 주소) 명시 안함
+  req.body.forEach(async (data) => {
+    const updateId = { _id: data._id };
+    const thumbCount = { thumbs: data.thumbs };
+    await contents.contentSchema.updateOne(updateId, {
+      $set: thumbCount,
+    });
+  });
+  res.status(200);
+});
+
 module.exports = router;
