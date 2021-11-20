@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import "../css/ViewContent.css";
+import "../css/ViewContentDetail.css";
 
 const ViewContent = () => {
   const datum = useLocation()?.datum;
+  const [editable, setEditable] = useState(false);
   const [postData, setPostData] = useState({
     id: "",
     title: "",
@@ -11,7 +12,26 @@ const ViewContent = () => {
     thumbs: "",
     date: "",
   });
-
+  const setContent = (value) => {
+    const newData = {
+      id: postData.id,
+      title: postData.title,
+      content: value,
+      thumbs: postData.thumbs,
+      date: postData.date,
+    };
+    setPostData(newData);
+  };
+  const setTitle = (value) => {
+    const newData = {
+      id: postData.id,
+      title: value,
+      content: postData.content,
+      thumbs: postData.thumbs,
+      date: postData.date,
+    };
+    setPostData(newData);
+  };
   useEffect(() => {
     setPostData({
       id: datum.id,
@@ -25,13 +45,33 @@ const ViewContent = () => {
     <div key={postData.id}>
       <div>
         <div className="view-content">
-          <h2 className="view-style">
-            {postData.title} &nbsp; 👍 : {postData.thumbs}{" "}
-          </h2>
+          {editable ? (
+            <h2 className="view-style">
+              <input value={postData.title} />
+              &nbsp; 👍 : {postData.thumbs}{" "}
+            </h2>
+          ) : (
+            <h2 className="view-style">
+              {postData.title} &nbsp; 👍 : {postData.thumbs}{" "}
+            </h2>
+          )}
         </div>
-        <h4 className="data-style">Date : {postData.date} </h4>
+        <p className="date-style">Date : {postData.date} </p>
         <hr />
-        <h3>{postData.content} </h3>
+        {editable ? (
+          <input
+            type="content"
+            value={postData.content}
+            onChange={({ target: { value } }) => setContent(value)}
+          />
+        ) : (
+          <h3>{postData.content} </h3>
+        )}
+      </div>
+      <div>
+        <button onClick={() => setEditable((prev) => !prev)}>
+          {editable ? "Cancel" : "Edit"}
+        </button>
       </div>
     </div>
   );
