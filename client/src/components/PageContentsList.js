@@ -73,7 +73,7 @@ const PageContentsList = () => {
                     datum: content,
                   }}
                 >
-                  {content.title}
+                  {content.title} &nbsp;
                 </Link>
 
                 <button type="button" value={content.id} onClick={thumbsUp}>
