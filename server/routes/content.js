@@ -26,7 +26,6 @@ router.get('/view/:id', async (req, res) => {
   }
 });
 router.post('/', async (req, res) => {
-  console.log(req.body);
   try {
     // for MAX
     contents.contentSchema.create(req.body, (err, data) => {
@@ -42,13 +41,17 @@ router.post('/', async (req, res) => {
 });
 
 // https://www.geeksforgeeks.org/mongodb-updatemany-method-db-collection-updatemany/?ref=rp
+// req.body : must  be array
 router.patch('/update', async (req, res) => {
   // 문제 : 식별자(정확한 주소) 명시 안함
+  console.log(req.body);
   req.body.forEach(async (data) => {
-    const updateId = { _id: data._id };
-    const thumbCount = { thumbs: data.thumbs };
+    const dataWithoutId = data;
+    delete dataWithoutId.id;
+
+    const updateId = { _id: mongoose.Types.ObjectId(data.id) };
     await contents.contentSchema.updateOne(updateId, {
-      $set: thumbCount,
+      $set: dataWithoutId,
     });
   });
   res.status(200);
