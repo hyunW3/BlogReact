@@ -16,7 +16,7 @@ const PageContentsList = () => {
     if (latestContents.current === undefined) return; // nothing to update
     latestContents.current.forEach((data) => {
       if (data.modified === true) {
-        updateList.push({ _id: data.id, thumbs: data.thumbs });
+        updateList.push({ id: data.id, thumbs: data.thumbs });
       }
     });
 

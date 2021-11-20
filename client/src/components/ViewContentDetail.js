@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import "../css/ViewContentDetail.css";
 
-const ViewContent = () => {
+const ViewContentDetail = () => {
   const datum = useLocation()?.datum;
   const [editable, setEditable] = useState(false);
   const [postData, setPostData] = useState({
-    id: "",
-    title: "",
-    content: "",
-    thumbs: "",
-    date: "",
+    id: datum.id,
+    title: datum.title,
+    content: datum.content,
+    thumbs: datum.thumbs,
+    date: datum.date,
+    modified: false,
   });
+  const latestData = useRef(postData);
   const setContent = (value) => {
     const newData = {
       id: postData.id,
@@ -19,8 +21,10 @@ const ViewContent = () => {
       content: value,
       thumbs: postData.thumbs,
       date: postData.date,
+      modified: true,
     };
     setPostData(newData);
+    latestData.current = newData;
   };
   const setTitle = (value) => {
     const newData = {
@@ -29,17 +33,33 @@ const ViewContent = () => {
       content: postData.content,
       thumbs: postData.thumbs,
       date: postData.date,
+      modified: true,
     };
     setPostData(newData);
+    latestData.current = newData;
+  };
+  const Update = async () => {
+    if (latestData.current.modified === true) {
+      const updateArr = [
+        {
+          id: latestData.current.id,
+          title: latestData.current.title,
+          content: latestData.current.content,
+          date: new Date(Date.now()),
+        },
+      ];
+      console.log(updateArr);
+      await fetch("/contents/update", {
+        method: "PATCH",
+        body: JSON.stringify(updateArr),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
   };
   useEffect(() => {
-    setPostData({
-      id: datum.id,
-      title: datum.title,
-      content: datum.content,
-      thumbs: datum.thumbs,
-      date: datum.date,
-    });
+    return Update;
   }, []);
   return (
     <div key={postData.id}>
@@ -47,7 +67,10 @@ const ViewContent = () => {
         <div className="view-content">
           {editable ? (
             <h2 className="view-style">
-              <input value={postData.title} />
+              <input
+                value={postData.title}
+                onChange={({ target: { value } }) => setTitle(value)}
+              />
               &nbsp; 👍 : {postData.thumbs}{" "}
             </h2>
           ) : (
@@ -70,11 +93,11 @@ const ViewContent = () => {
       </div>
       <div>
         <button onClick={() => setEditable((prev) => !prev)}>
-          {editable ? "Cancel" : "Edit"}
+          {editable ? "Save" : "Edit"}
         </button>
       </div>
     </div>
   );
 };
 
-export default ViewContent;
+export default ViewContentDetail;
