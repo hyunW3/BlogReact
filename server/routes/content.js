@@ -44,17 +44,23 @@ router.post('/', async (req, res) => {
 // req.body : must  be array
 router.patch('/update', async (req, res) => {
   // 문제 : 식별자(정확한 주소) 명시 안함
-  console.log(req.body);
+  let isSuccess = true;
   req.body.forEach(async (data) => {
     const dataWithoutId = data;
+    const updateId = { _id: mongoose.Types.ObjectId(data.id) };
     delete dataWithoutId.id;
 
-    const updateId = { _id: mongoose.Types.ObjectId(data.id) };
-    await contents.contentSchema.updateOne(updateId, {
+    const retVal = await contents.contentSchema.updateOne(updateId, {
       $set: dataWithoutId,
     });
+    if (retVal.n !== retVal.nModified) {
+      res.status(400).send('wrong request ');
+      isSuccess = false;
+    }
   });
-  res.status(200);
+  if (isSuccess === true) {
+    res.status(200).send('success request');
+  }
 });
 
 module.exports = router;
