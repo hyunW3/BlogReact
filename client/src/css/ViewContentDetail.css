@@ -2,9 +2,9 @@ input {
 	size : 10;
 	height : 32;
 }
-input[type="content"] {
+input[type="contentDetail"] {
 	width : 80%;	
-	height : 30%;
+	height : 350px;
 }
 .view-style { 
 	width : 80%;
