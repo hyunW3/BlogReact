@@ -1,5 +1,5 @@
 .page-title {
-	display: flex;
+    display: flex;
     padding-left: 60px;
     text-align: left;
     align-items: baseline;
@@ -12,5 +12,5 @@
     border: 2px solid black;
 }
 .title-style{
-	padding : 10px 100px 0px 0px;
+    padding : 10px 100px 0px 0px;
 }
