@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "../css/ViewContentDetail.css";
 
 const ViewContentDetail = () => {
@@ -38,7 +38,11 @@ const ViewContentDetail = () => {
     setPostData(newData);
     latestData.current = newData;
   };
+  const toggleEditable = () => {
+    setEditable((prev) => !prev);
+  };
   const Update = async () => {
+    toggleEditable();
     if (latestData.current.modified === true) {
       const updateArr = [
         {
@@ -58,9 +62,7 @@ const ViewContentDetail = () => {
       });
     }
   };
-  useEffect(() => {
-    return Update;
-  }, []);
+
   return (
     <div key={postData.id}>
       <div>
@@ -83,7 +85,7 @@ const ViewContentDetail = () => {
         <hr />
         {editable ? (
           <input
-            type="content"
+            type="contentDetail"
             value={postData.content}
             onChange={({ target: { value } }) => setContent(value)}
           />
@@ -92,9 +94,19 @@ const ViewContentDetail = () => {
         )}
       </div>
       <div>
-        <button onClick={() => setEditable((prev) => !prev)}>
-          {editable ? "Save" : "Edit"}
-        </button>
+        {editable ? (
+          <>
+            <button onClick={Update}> Save </button>
+            <button onClick={toggleEditable}>Cancel</button>
+          </>
+        ) : (
+          <>
+            <button onClick={toggleEditable}> Edit</button>
+            <Link to="../">
+              <button> Back </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
