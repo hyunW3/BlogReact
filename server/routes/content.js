@@ -50,11 +50,11 @@ router.patch('/update', async (req, res) => {
     const updateId = { _id: mongoose.Types.ObjectId(data.id) };
     delete dataWithoutId.id;
 
-    const retVal = await contents.contentSchema.updateOne(updateId, {
+    const dbResponse = await contents.contentSchema.updateOne(updateId, {
       $set: dataWithoutId,
     });
-    if (retVal.n !== retVal.nModified) {
-      res.status(400).send('wrong request ');
+    if (dbResponse.n !== dbResponse.nModified) {
+      res.status(400).send('wrong request');
       isSuccess = false;
     }
   });
