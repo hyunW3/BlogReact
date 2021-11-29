@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import FetchContent from "../api/FetchContent";
+import ContentInList from "./ContentInList";
 import "../css/Contents.css";
 
 const PageContentsList = () => {
@@ -16,12 +16,10 @@ const PageContentsList = () => {
     if (latestContents.current === undefined) return; // nothing to update
     latestContents.current.forEach((data) => {
       if (data.modified === true) {
-        updateList.push({ _id: data.id, thumbs: data.thumbs });
+        updateList.push({ id: data.id, thumbs: data.thumbs });
       }
     });
 
-    // setstate async problem -> Mobx?
-    // https://techblog.woowahan.com/2599/
     if (updateList.length > 0) {
       await fetch("/contents/update", {
         method: "PATCH",
@@ -65,24 +63,7 @@ const PageContentsList = () => {
       <div className="contentsList">
         {contents &&
           contents.map((content) => (
-            <div key={content.id}>
-              <h3>
-                <Link
-                  to={{
-                    pathname: `/contents/view/${content.id}`,
-                    datum: content,
-                  }}
-                >
-                  {content.title}
-                </Link>
-
-                <button type="button" value={content.id} onClick={thumbsUp}>
-                  👍{content.thumbs}
-                </button>
-              </h3>
-              {content.date}에 작성
-              <hr />
-            </div>
+            <ContentInList content={content} thumbsUp={thumbsUp} />
           ))}
       </div>
     </div>

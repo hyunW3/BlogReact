@@ -1,8 +1,10 @@
 .page-title {
-	display : flex;
-	padding-left : 60px;
-	text-align : left;
-	align-items : baseline;
+    display: flex;
+    padding-left: 60px;
+    text-align: left;
+    align-items: baseline;
+    align-content: flex-end;
+    justify-content: space-evenly;
 }
 .button-style {
     color: black;
@@ -10,5 +12,5 @@
     border: 2px solid black;
 }
 .title-style{
-	padding-right : 300px;
+    padding : 10px 100px 0px 0px;
 }

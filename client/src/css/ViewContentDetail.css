@@ -1,0 +1,15 @@
+input {
+	size : 10;
+	height : 32;
+}
+input[type="contentDetail"] {
+	width : 80%;	
+	height : 350px;
+}
+.view-style { 
+	width : 80%;
+	margin-bottom: 0px ;
+}
+.date-style { 
+	margin: 3px 0px 3px 0px;
+}
