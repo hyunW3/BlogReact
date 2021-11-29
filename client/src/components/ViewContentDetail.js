@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "../css/ViewContentDetail.css";
 
 const ViewContentDetail = () => {
-  const datum = useLocation()?.datum;
+  const data = useLocation()?.data;
   const [editable, setEditable] = useState(false);
   const [postData, setPostData] = useState({
-    id: datum.id,
-    title: datum.title,
-    content: datum.content,
-    thumbs: datum.thumbs,
-    date: datum.date,
+    id: data.id,
+    title: data.title,
+    content: data.content,
+    thumbs: data.thumbs,
+    date: data.date,
     modified: false,
   });
   const latestData = useRef(postData);
@@ -52,7 +52,7 @@ const ViewContentDetail = () => {
           date: new Date(Date.now()),
         },
       ];
-      console.log(updateArr);
+      // console.log(updateArr);
       await fetch("/contents/update", {
         method: "PATCH",
         body: JSON.stringify(updateArr),
