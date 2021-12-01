@@ -43,7 +43,9 @@
 		"jsx-a11y/no-noninteractive-element-interactions" : "warn",
 		"no-unused-vars" : "warn",
 		"spaced-comment" : "warn",
-        "import/newline-after-import" : "warn"
+        "import/newline-after-import" : "warn",
+		"react/prop-types" : "warn",
+		"prefer-object-spread" : "warn"
     },
     "ignorePatterns": [
         "node_modules/"
