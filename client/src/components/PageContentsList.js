@@ -1,63 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch, connect } from "react-redux";
 import FetchContent from "../api/FetchContent";
+import BlogContent, {
+  InitContent,
+  ADDContent,
+  ThumbsUpContent,
+} from "../redux/BlogContent";
 import "../css/Contents.css";
 
 const PageContentsList = () => {
-  const [contents, setContents] = useState([]);
-  const latestContents = useRef();
-  const fetchData = async () => {
+  const { contents } = useSelector((state) => {
+    return state.BlogContent;
+  });
+  const dispatch = useDispatch();
+  const initiateData = async () => {
     const newArr = await FetchContent();
-    setContents(newArr);
+    dispatch(InitContent(newArr));
   };
 
-  const Update = async () => {
-    const updateList = [];
-    if (latestContents.current === undefined) return; // nothing to update
-    latestContents.current.forEach((data) => {
-      if (data.modified === true) {
-        updateList.push({ _id: data.id, thumbs: data.thumbs });
-      }
-    });
+  const Update = async (targetId) => {
+    let targetContent = contents.find((x) => x.id === targetId);
+    targetContent = [
+      { _id: targetContent.id, thumbs: targetContent.thumbs + 1 },
+    ];
+    // thumbs : not sync with redux
 
-    // setstate async problem -> Mobx?
-    // https://techblog.woowahan.com/2599/
-    if (updateList.length > 0) {
-      await fetch("/contents/update", {
-        method: "PATCH",
-        body: JSON.stringify(updateList),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
+    await fetch("/contents/updateThumbs", {
+      method: "PATCH",
+      body: JSON.stringify(targetContent),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
   useEffect(() => {
-    fetchData();
-    return Update;
+    if (contents.length === 0) initiateData();
   }, []);
 
-  const thumbsUp = (event) => {
+  const thumbsUp = async (event) => {
     const {
       target: { value },
     } = event; // event.target.value
     const targetId = value;
-    const newArr = contents.map((data) => {
-      if (data.id === targetId) {
-        const { id, title, content, date, thumbs } = data;
-        return {
-          id,
-          title,
-          content,
-          date,
-          thumbs: thumbs + 1,
-          modified: true,
-        };
-      } // else
-      return data;
-    });
-    latestContents.current = newArr;
-    setContents(newArr);
+    dispatch(ThumbsUpContent(targetId));
+    Update(targetId);
   };
 
   return (
