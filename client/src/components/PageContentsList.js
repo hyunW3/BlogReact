@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import FetchContent from "../api/FetchContent";
+import ContentInList from "./ContentInList";
 import BlogContent, {
   InitContent,
   ADDContent,
