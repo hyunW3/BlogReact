@@ -1,12 +1,14 @@
-.title-style { 
+.post-title-style { 
 	padding : 0px;
 	width: 80%;
+	text-align : center;
 }
 .content-style { 
 	width: 80%;
 	height: 450px;
+	text-align : center;
 }
-.button-style { 
+.post-button-style { 
 	margin: 10px; 
 	text-align : center;
 }

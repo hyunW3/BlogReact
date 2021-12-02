@@ -26,7 +26,6 @@ router.get('/view/:id', async (req, res) => {
   }
 });
 router.post('/', async (req, res) => {
-  console.log(req.body);
   try {
     // for MAX
     contents.contentSchema.create(req.body, (err, data) => {
@@ -42,16 +41,26 @@ router.post('/', async (req, res) => {
 });
 
 // https://www.geeksforgeeks.org/mongodb-updatemany-method-db-collection-updatemany/?ref=rp
+// req.body : must  be array
 router.patch('/update', async (req, res) => {
   // 문제 : 식별자(정확한 주소) 명시 안함
+  let isSuccess = true;
   req.body.forEach(async (data) => {
-    const updateId = { _id: data._id };
-    const thumbCount = { thumbs: data.thumbs };
-    await contents.contentSchema.updateOne(updateId, {
-      $set: thumbCount,
+    const dataWithoutId = data;
+    const updateId = { _id: mongoose.Types.ObjectId(data.id) };
+    delete dataWithoutId.id;
+
+    const dbResponse = await contents.contentSchema.updateOne(updateId, {
+      $set: dataWithoutId,
     });
+    if (dbResponse.n !== dbResponse.nModified) {
+      res.status(400).send('wrong request');
+      isSuccess = false;
+    }
   });
-  res.status(200);
+  if (isSuccess === true) {
+    res.status(200).send('success request');
+  }
 });
 
 module.exports = router;

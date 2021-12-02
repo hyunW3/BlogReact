@@ -52,24 +52,7 @@ const PageContentsList = () => {
       <div className="contentsList">
         {contents &&
           contents.map((content) => (
-            <div key={content.id}>
-              <h3>
-                <Link
-                  to={{
-                    pathname: `/contents/view/${content.id}`,
-                    datum: content,
-                  }}
-                >
-                  {content.title}
-                </Link>
-
-                <button type="button" value={content.id} onClick={thumbsUp}>
-                  👍{content.thumbs}
-                </button>
-              </h3>
-              {content.date}에 작성
-              <hr />
-            </div>
+            <ContentInList content={content} thumbsUp={thumbsUp} />
           ))}
       </div>
     </div>
