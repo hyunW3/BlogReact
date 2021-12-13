@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UpdateContent } from "../redux/BlogContent";
-import FetchContent from "../api/FetchContent";
 import initiateData from "../api/InitiateDataRedux";
+import ChangeContentData from "../api/ChangeContentData";
 import "../css/ViewContentDetail.css";
 
-const ViewContentDetail = ({ match, location }) => {
+const ViewContentDetail = ({ match }) => {
   const targetId = match?.params.id;
   let postData = useSelector((state) => {
     return state.BlogContent.contents.find((x) => x.id === targetId);
@@ -15,25 +15,11 @@ const ViewContentDetail = ({ match, location }) => {
 
   const [editable, setEditable] = useState(false);
   const setContent = (value) => {
-    const newData = {
-      id: postData.id,
-      title: postData.title,
-      content: value,
-      thumbs: postData.thumbs,
-      date: postData.date,
-      modified: true,
-    };
+    const newData = ChangeContentData(postData, "content", value);
     dispatch(UpdateContent(postData.id, newData));
   };
   const setTitle = (value) => {
-    const newData = {
-      id: postData.id,
-      title: value,
-      content: postData.content,
-      thumbs: postData.thumbs,
-      date: postData.date,
-      modified: true,
-    };
+    const newData = ChangeContentData(postData, "title", value);
     dispatch(UpdateContent(postData.id, newData));
   };
   const toggleEditable = () => {
@@ -63,7 +49,7 @@ const ViewContentDetail = ({ match, location }) => {
   };
   if (postData === undefined) {
     postData = window.localStorage.getItem("state");
-    initiateData();
+    initiateData(dispatch);
   } else {
     window.localStorage.setItem("state", postData);
   }
@@ -101,14 +87,22 @@ const ViewContentDetail = ({ match, location }) => {
       <div>
         {editable ? (
           <>
-            <button onClick={Update}> Save </button>
-            <button onClick={toggleEditable}>Cancel</button>
+            <button type="button" onClick={Update}>
+              {" "}
+              Save{" "}
+            </button>
+            <button type="button" onClick={toggleEditable}>
+              Cancel
+            </button>
           </>
         ) : (
           <>
-            <button onClick={toggleEditable}> Edit</button>
+            <button type="button" onClick={toggleEditable}>
+              {" "}
+              Edit
+            </button>
             <Link to="../">
-              <button> Back </button>
+              <button type="button"> Back </button>
             </Link>
           </>
         )}
