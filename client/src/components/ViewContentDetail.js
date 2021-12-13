@@ -11,19 +11,26 @@ const ViewContentDetail = ({ match }) => {
   let postData = useSelector((state) => {
     return state.BlogContent.contents.find((x) => x.id === targetId);
   });
+  const [prevPostData, setPrevPostData] = useState();
   const dispatch = useDispatch();
 
   const [editable, setEditable] = useState(false);
   const setContent = (value) => {
     const newData = ChangeContentData(postData, "content", value);
+    if (prevPostData === undefined) setPrevPostData(postData);
     dispatch(UpdateContent(postData.id, newData));
   };
   const setTitle = (value) => {
     const newData = ChangeContentData(postData, "title", value);
+    if (prevPostData === undefined) setPrevPostData(postData);
     dispatch(UpdateContent(postData.id, newData));
   };
   const toggleEditable = () => {
     setEditable((prev) => !prev);
+  };
+  const CancelSave = () => {
+    toggleEditable();
+    dispatch(UpdateContent(postData.id, prevPostData));
   };
   const Update = async () => {
     toggleEditable();
@@ -36,7 +43,6 @@ const ViewContentDetail = ({ match }) => {
           date: new Date(Date.now()),
         },
       ];
-      // console.log("update!",updateArr);
 
       await fetch("/contents/update", {
         method: "PATCH",
@@ -49,7 +55,7 @@ const ViewContentDetail = ({ match }) => {
   };
   if (postData === undefined) {
     postData = window.localStorage.getItem("state");
-    initiateData(dispatch);
+    initiateData();
   } else {
     window.localStorage.setItem("state", postData);
   }
@@ -91,7 +97,7 @@ const ViewContentDetail = ({ match }) => {
               {" "}
               Save{" "}
             </button>
-            <button type="button" onClick={toggleEditable}>
+            <button type="button" onClick={CancelSave}>
               Cancel
             </button>
           </>
