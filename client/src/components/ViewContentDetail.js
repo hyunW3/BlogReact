@@ -55,7 +55,7 @@ const ViewContentDetail = ({ match }) => {
   };
   if (postData === undefined) {
     postData = window.localStorage.getItem("state");
-    initiateData();
+    initiateData(dispatch);
   } else {
     window.localStorage.setItem("state", postData);
   }
