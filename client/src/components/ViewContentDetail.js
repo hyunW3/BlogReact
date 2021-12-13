@@ -1,19 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
+import { UpdateContent } from "../redux/BlogContent";
+import FetchContent from "../api/FetchContent";
+import initiateData from "../api/InitiateDataRedux";
 import "../css/ViewContentDetail.css";
 
-const ViewContentDetail = () => {
-  const data = useLocation()?.data;
-  const [editable, setEditable] = useState(false);
-  const [postData, setPostData] = useState({
-    id: data.id,
-    title: data.title,
-    content: data.content,
-    thumbs: data.thumbs,
-    date: data.date,
-    modified: false,
+const ViewContentDetail = ({ match, location }) => {
+  const targetId = match?.params.id;
+  let postData = useSelector((state) => {
+    return state.BlogContent.contents.find((x) => x.id === targetId);
   });
-  const latestData = useRef(postData);
+  const dispatch = useDispatch();
+
+  const [editable, setEditable] = useState(false);
   const setContent = (value) => {
     const newData = {
       id: postData.id,
@@ -23,8 +23,7 @@ const ViewContentDetail = () => {
       date: postData.date,
       modified: true,
     };
-    setPostData(newData);
-    latestData.current = newData;
+    dispatch(UpdateContent(postData.id, newData));
   };
   const setTitle = (value) => {
     const newData = {
@@ -35,24 +34,24 @@ const ViewContentDetail = () => {
       date: postData.date,
       modified: true,
     };
-    setPostData(newData);
-    latestData.current = newData;
+    dispatch(UpdateContent(postData.id, newData));
   };
   const toggleEditable = () => {
     setEditable((prev) => !prev);
   };
   const Update = async () => {
     toggleEditable();
-    if (latestData.current.modified === true) {
+    if (postData.modified === true) {
       const updateArr = [
         {
-          id: latestData.current.id,
-          title: latestData.current.title,
-          content: latestData.current.content,
+          id: postData.id,
+          title: postData.title,
+          content: postData.content,
           date: new Date(Date.now()),
         },
       ];
-      // console.log(updateArr);
+      // console.log("update!",updateArr);
+
       await fetch("/contents/update", {
         method: "PATCH",
         body: JSON.stringify(updateArr),
@@ -62,6 +61,12 @@ const ViewContentDetail = () => {
       });
     }
   };
+  if (postData === undefined) {
+    postData = window.localStorage.getItem("state");
+    initiateData();
+  } else {
+    window.localStorage.setItem("state", postData);
+  }
 
   return (
     <div key={postData.id}>

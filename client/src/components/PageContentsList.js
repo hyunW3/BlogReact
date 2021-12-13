@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FetchContent from "../api/FetchContent";
 import ContentInList from "./ContentInList";
-import BlogContent, {
-  InitContent,
-  ADDContent,
-  ThumbsUpContent,
-} from "../redux/BlogContent";
+import initiateData from "../api/InitiateDataRedux";
+import { ThumbsUpContent } from "../redux/BlogContent";
 import "../css/Contents.css";
 
 const PageContentsList = () => {
@@ -15,10 +12,6 @@ const PageContentsList = () => {
     return state.BlogContent;
   });
   const dispatch = useDispatch();
-  const initiateData = async () => {
-    const newArr = await FetchContent();
-    dispatch(InitContent(newArr));
-  };
 
   const Update = async (targetId) => {
     let targetContent = contents.find((x) => x.id === targetId);
@@ -26,8 +19,8 @@ const PageContentsList = () => {
       { _id: targetContent.id, thumbs: targetContent.thumbs + 1 },
     ];
     // thumbs : not sync with redux
-
-    await fetch("/contents/updateThumbs", {
+    // path : /contents/updateThumbs
+    await fetch("/update", {
       method: "PATCH",
       body: JSON.stringify(targetContent),
       headers: {
@@ -53,7 +46,11 @@ const PageContentsList = () => {
       <div className="contentsList">
         {contents &&
           contents.map((content) => (
-            <ContentInList content={content} thumbsUp={thumbsUp} />
+            <ContentInList
+              key={content.id}
+              content={content}
+              thumbsUp={thumbsUp}
+            />
           ))}
       </div>
     </div>
