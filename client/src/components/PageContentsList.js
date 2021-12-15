@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ContentInList from "./ContentInList";
-import initiateData from "../api/InitiateDataRedux";
+import initiateContentData from "../api/InitiateDataRedux";
 import { ThumbsUpContent } from "../redux/BlogContent";
 import "../css/Contents.css";
 
@@ -27,7 +27,7 @@ const PageContentsList = () => {
     });
   };
   useEffect(() => {
-    if (contents.length === 0) initiateData(dispatch);
+    if (contents.length === 0) initiateContentData(dispatch);
   }, []);
 
   const thumbsUp = async (event) => {

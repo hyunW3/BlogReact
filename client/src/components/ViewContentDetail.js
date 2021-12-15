@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import ContentDetail from "./ContentDetail";
 import { UpdateContent } from "../redux/BlogContent";
 import initiateData from "../api/InitiateDataRedux";
-import ChangeContentData from "../api/ChangeContentData";
+import initiateContentData from "../api/ChangeDataRedux";
 import "../css/ViewContentDetail.css";
 
 const ViewContentDetail = ({ match }) => {
@@ -16,12 +16,12 @@ const ViewContentDetail = ({ match }) => {
 
   const [editable, setEditable] = useState(false);
   const setContent = (value) => {
-    const newData = ChangeContentData(postData, "content", value);
+    const newData = initiateContentData(postData, "content", value);
     if (prevPostData === undefined) setPrevPostData(postData);
     dispatch(UpdateContent(postData.id, newData));
   };
   const setTitle = (value) => {
-    const newData = ChangeContentData(postData, "title", value);
+    const newData = initiateContentData(postData, "title", value);
     if (prevPostData === undefined) setPrevPostData(postData);
     dispatch(UpdateContent(postData.id, newData));
   };
@@ -53,67 +53,25 @@ const ViewContentDetail = ({ match }) => {
       });
     }
   };
+  // 새로고침했을 때 정보가 사라지는 것을 방지하기 위해 두었습니다.
   if (postData === undefined) {
     postData = window.localStorage.getItem("state");
     initiateData(dispatch);
   } else {
     window.localStorage.setItem("state", postData);
   }
+  const API = {
+    toggleEditable,
+    CancelSave,
+    Update,
+    setContent,
+    setTitle,
+  };
 
   return (
-    <div key={postData.id}>
-      <div>
-        <div className="view-content">
-          {editable ? (
-            <h2 className="view-style">
-              <input
-                value={postData.title}
-                onChange={({ target: { value } }) => setTitle(value)}
-              />
-              &nbsp; 👍 : {postData.thumbs}{" "}
-            </h2>
-          ) : (
-            <h2 className="view-style">
-              {postData.title} &nbsp; 👍 : {postData.thumbs}{" "}
-            </h2>
-          )}
-        </div>
-        <p className="date-style">Date : {postData.date} </p>
-        <hr />
-        {editable ? (
-          <input
-            type="contentDetail"
-            value={postData.content}
-            onChange={({ target: { value } }) => setContent(value)}
-          />
-        ) : (
-          <h3>{postData.content} </h3>
-        )}
-      </div>
-      <div>
-        {editable ? (
-          <>
-            <button type="button" onClick={Update}>
-              {" "}
-              Save{" "}
-            </button>
-            <button type="button" onClick={CancelSave}>
-              Cancel
-            </button>
-          </>
-        ) : (
-          <>
-            <button type="button" onClick={toggleEditable}>
-              {" "}
-              Edit
-            </button>
-            <Link to="../">
-              <button type="button"> Back </button>
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      <ContentDetail postData={postData} editable={editable} API={API} />
+    </>
   );
 };
 
