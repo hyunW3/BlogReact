@@ -4,6 +4,7 @@ import ContentDetail from "./ContentDetail";
 import { UpdateContent } from "../redux/BlogContent";
 import initiateData from "../api/InitiateDataRedux";
 import initiateContentData from "../api/ChangeDataRedux";
+import UpdateContentDB from "../api/UpdateContentDB";
 import "../css/ViewContentDetail.css";
 
 const ViewContentDetail = ({ match }) => {
@@ -43,14 +44,7 @@ const ViewContentDetail = ({ match }) => {
           date: new Date(Date.now()),
         },
       ];
-
-      await fetch("/contents/update", {
-        method: "PATCH",
-        body: JSON.stringify(updateArr),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      UpdateContentDB(updateArr);
     }
   };
   // 새로고침했을 때 정보가 사라지는 것을 방지하기 위해 두었습니다.

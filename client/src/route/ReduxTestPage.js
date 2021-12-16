@@ -5,7 +5,7 @@ import ReduxStarter, {
   reduxMINUS,
   reduxTOGGLE,
 } from "../redux/ReduxStarter";
-import FetchContent from "../api/FetchContent";
+import FetchContentDB from "../api/FetchContentDB";
 import BlogContent, { InitContent, ADDContent } from "../redux/BlogContent";
 
 const ReduxTestPage = () => {
@@ -14,7 +14,7 @@ const ReduxTestPage = () => {
   });
   const [contents, setContents] = useState([]);
   const fetchData = async () => {
-    const newArr = await FetchContent();
+    const newArr = await FetchContentDB();
     setContents(newArr);
   };
   const dispatch = useDispatch();

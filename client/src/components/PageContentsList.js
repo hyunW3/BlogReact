@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ContentInList from "./ContentInList";
 import initiateContentData from "../api/InitiateDataRedux";
+import UpdateContentDB from "../api/UpdateContentDB";
 import { ThumbsUpContent } from "../redux/BlogContent";
 import "../css/Contents.css";
 
@@ -17,14 +18,7 @@ const PageContentsList = () => {
       { _id: targetContent.id, thumbs: targetContent.thumbs + 1 },
     ];
     // thumbs : not sync with redux
-    // path : /contents/updateThumbs
-    await fetch("/update", {
-      method: "PATCH",
-      body: JSON.stringify(targetContent),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    UpdateContentDB(targetContent);
   };
   useEffect(() => {
     if (contents.length === 0) initiateContentData(dispatch);
