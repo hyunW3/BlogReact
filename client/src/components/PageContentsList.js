@@ -1,61 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
-import FetchContent from "../api/FetchContent";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ContentInList from "./ContentInList";
+import initiateContentData from "../api/InitiateDataRedux";
+import UpdateContentDB from "../api/UpdateContentDB";
+import { ThumbsUpContent } from "../redux/BlogContent";
 import "../css/Contents.css";
 
 const PageContentsList = () => {
-  const [contents, setContents] = useState([]);
-  const latestContents = useRef();
-  const fetchData = async () => {
-    const newArr = await FetchContent();
-    setContents(newArr);
-  };
+  const { contents } = useSelector((state) => {
+    return state.BlogContent;
+  });
+  const dispatch = useDispatch();
 
-  const Update = async () => {
-    const updateList = [];
-    if (latestContents.current === undefined) return; // nothing to update
-    latestContents.current.forEach((data) => {
-      if (data.modified === true) {
-        updateList.push({ id: data.id, thumbs: data.thumbs });
-      }
-    });
-
-    if (updateList.length > 0) {
-      await fetch("/contents/update", {
-        method: "PATCH",
-        body: JSON.stringify(updateList),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
+  const Update = async (targetId) => {
+    let targetContent = contents.find((x) => x.id === targetId);
+    targetContent = [
+      { _id: targetContent.id, thumbs: targetContent.thumbs + 1 },
+    ];
+    // thumbs : not sync with redux
+    UpdateContentDB(targetContent);
   };
   useEffect(() => {
-    fetchData();
-    return Update;
+    if (contents.length === 0) initiateContentData(dispatch);
   }, []);
 
-  const thumbsUp = (event) => {
+  const thumbsUp = async (event) => {
     const {
       target: { value },
     } = event; // event.target.value
     const targetId = value;
-    const newArr = contents.map((data) => {
-      if (data.id === targetId) {
-        const { id, title, content, date, thumbs } = data;
-        return {
-          id,
-          title,
-          content,
-          date,
-          thumbs: thumbs + 1,
-          modified: true,
-        };
-      } // else
-      return data;
-    });
-    latestContents.current = newArr;
-    setContents(newArr);
+    dispatch(ThumbsUpContent(targetId));
+    Update(targetId);
   };
 
   return (
@@ -63,7 +38,11 @@ const PageContentsList = () => {
       <div className="contentsList">
         {contents &&
           contents.map((content) => (
-            <ContentInList content={content} thumbsUp={thumbsUp} />
+            <ContentInList
+              key={content.id}
+              content={content}
+              thumbsUp={thumbsUp}
+            />
           ))}
       </div>
     </div>

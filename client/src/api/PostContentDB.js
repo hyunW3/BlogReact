@@ -1,4 +1,4 @@
-const PostContent = async (title, content) => {
+const PostContentDB = async (title, content) => {
   const databody = {
     title,
     content,
@@ -13,4 +13,4 @@ const PostContent = async (title, content) => {
   });
 };
 
-export default PostContent;
+export default PostContentDB;

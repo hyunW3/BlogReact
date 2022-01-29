@@ -9,7 +9,6 @@ const ContentInList = ({ content, thumbsUp }) => {
         <Link
           to={{
             pathname: `/contents/view/${content.id}`,
-            data: content,
           }}
         >
           {content.title} &nbsp;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/ShowPersonInfo.css";
 
-const ShowPersonInfo = (person) => {
+const ShowPersonInfo = ({ person }) => {
   const [name, setName] = useState("");
   const [githubUrl, setGithubUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
@@ -11,7 +11,7 @@ const ShowPersonInfo = (person) => {
   ];
   const SeungjunInfo = ["https://github.com/sjuuun"];
   useEffect(() => {
-    const tmpName = person.person;
+    const tmpName = person;
     setName(tmpName);
     if (tmpName === "Seungjun") {
       setGithubUrl(SeungjunInfo[0]);

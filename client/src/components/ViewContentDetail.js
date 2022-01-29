@@ -1,114 +1,71 @@
-import React, { useState, useRef } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ContentDetail from "./ContentDetail";
+import { UpdateContent } from "../redux/BlogContent";
+import initiateData from "../api/InitiateDataRedux";
+import initiateContentData from "../api/ChangeDataRedux";
+import UpdateContentDB from "../api/UpdateContentDB";
 import "../css/ViewContentDetail.css";
 
-const ViewContentDetail = () => {
-  const data = useLocation()?.data;
-  const [editable, setEditable] = useState(false);
-  const [postData, setPostData] = useState({
-    id: data.id,
-    title: data.title,
-    content: data.content,
-    thumbs: data.thumbs,
-    date: data.date,
-    modified: false,
+const ViewContentDetail = ({ match }) => {
+  const targetId = match?.params.id;
+  let postData = useSelector((state) => {
+    return state.BlogContent.contents.find((x) => x.id === targetId);
   });
-  const latestData = useRef(postData);
+  const [prevPostData, setPrevPostData] = useState();
+  const dispatch = useDispatch();
+
+  const [editable, setEditable] = useState(false);
   const setContent = (value) => {
-    const newData = {
-      id: postData.id,
-      title: postData.title,
-      content: value,
-      thumbs: postData.thumbs,
-      date: postData.date,
-      modified: true,
-    };
-    setPostData(newData);
-    latestData.current = newData;
+    const newData = initiateContentData(postData, "content", value);
+    if (prevPostData === undefined) setPrevPostData(postData);
+    dispatch(UpdateContent(postData.id, newData));
   };
   const setTitle = (value) => {
-    const newData = {
-      id: postData.id,
-      title: value,
-      content: postData.content,
-      thumbs: postData.thumbs,
-      date: postData.date,
-      modified: true,
-    };
-    setPostData(newData);
-    latestData.current = newData;
+    const newData = initiateContentData(postData, "title", value);
+    if (prevPostData === undefined) setPrevPostData(postData);
+    dispatch(UpdateContent(postData.id, newData));
   };
   const toggleEditable = () => {
     setEditable((prev) => !prev);
   };
+  const CancelSave = () => {
+    toggleEditable();
+    dispatch(UpdateContent(postData.id, prevPostData));
+  };
   const Update = async () => {
     toggleEditable();
-    if (latestData.current.modified === true) {
+    if (postData.modified === true) {
       const updateArr = [
         {
-          id: latestData.current.id,
-          title: latestData.current.title,
-          content: latestData.current.content,
+          id: postData.id,
+          title: postData.title,
+          content: postData.content,
           date: new Date(Date.now()),
         },
       ];
-      // console.log(updateArr);
-      await fetch("/contents/update", {
-        method: "PATCH",
-        body: JSON.stringify(updateArr),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      UpdateContentDB(updateArr);
     }
+  };
+  // 새로고침했을 때 정보가 사라지는 것을 방지하기 위해 두었습니다.
+  if (postData === undefined) {
+    postData = window.localStorage.getItem("state");
+    initiateData(dispatch);
+  } else {
+    window.localStorage.setItem("state", postData);
+  }
+  const API = {
+    toggleEditable,
+    CancelSave,
+    Update,
+    setContent,
+    setTitle,
   };
 
   return (
-    <div key={postData.id}>
-      <div>
-        <div className="view-content">
-          {editable ? (
-            <h2 className="view-style">
-              <input
-                value={postData.title}
-                onChange={({ target: { value } }) => setTitle(value)}
-              />
-              &nbsp; 👍 : {postData.thumbs}{" "}
-            </h2>
-          ) : (
-            <h2 className="view-style">
-              {postData.title} &nbsp; 👍 : {postData.thumbs}{" "}
-            </h2>
-          )}
-        </div>
-        <p className="date-style">Date : {postData.date} </p>
-        <hr />
-        {editable ? (
-          <input
-            type="contentDetail"
-            value={postData.content}
-            onChange={({ target: { value } }) => setContent(value)}
-          />
-        ) : (
-          <h3>{postData.content} </h3>
-        )}
-      </div>
-      <div>
-        {editable ? (
-          <>
-            <button onClick={Update}> Save </button>
-            <button onClick={toggleEditable}>Cancel</button>
-          </>
-        ) : (
-          <>
-            <button onClick={toggleEditable}> Edit</button>
-            <Link to="../">
-              <button> Back </button>
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      <ContentDetail postData={postData} editable={editable} API={API} />
+    </>
   );
 };
 

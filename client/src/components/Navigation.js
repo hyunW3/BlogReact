@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HamburgerButton from "./HamburgerButton";
 import CategoryItem from "./CategoryItem";
-import FetchCategory from "../api/FetchCategory";
+import FetchCategoryDB from "../api/FetchCategoryDB";
 import "../css/Navigation.css";
 
 const Navigation = () => {
@@ -12,7 +12,7 @@ const Navigation = () => {
     setShowMenu(!showMenu);
   };
   useEffect(async () => {
-    const newArr = await FetchCategory();
+    const newArr = await FetchCategoryDB();
     setCategories(newArr);
   }, []);
 

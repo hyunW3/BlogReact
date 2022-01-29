@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PostContent from "../api/PostContent";
+import PostContentDB from "../api/PostContentDB";
 import "../css/WriteContent.css";
 
 const WriteContent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const requestPost = async () => {
-    await PostContent(title, content);
+    await PostContentDB(title, content);
   };
   return (
     <div>

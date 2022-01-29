@@ -1,8 +1,8 @@
-const FetchCategory = async () => {
+const FetchCategoryDB = async () => {
   const newArr = [];
-  await fetch("./categories")
+  await fetch("/categories")
     .then((res) => res.json())
     .then((res) => res.forEach((data) => newArr.push([data._id, data.name])));
   return newArr;
 };
-export default FetchCategory;
+export default FetchCategoryDB;
