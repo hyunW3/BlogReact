@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import propTypes from "prop-types";
 import ContentDetail from "./ContentDetail";
 import { UpdateContent } from "../redux/BlogContent";
 import initiateData from "../api/InitiateDataRedux";
@@ -67,6 +68,10 @@ const ViewContentDetail = ({ match }) => {
       <ContentDetail postData={postData} editable={editable} API={API} />
     </>
   );
+};
+
+ViewContentDetail.propTypes = {
+  match: propTypes.objectOf(propTypes.any).isRequired,
 };
 
 export default ViewContentDetail;

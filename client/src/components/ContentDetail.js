@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const ContentDetail = ({ postData, editable, API }) => {
   return (
@@ -62,4 +63,24 @@ const ContentDetail = ({ postData, editable, API }) => {
     </div>
   );
 };
+
+const contentProps = {
+  id: PropTypes.id,
+  title: PropTypes.string,
+  thumbs: PropTypes.int,
+  date: PropTypes.string,
+};
+const apiProps = {
+  setTitle: PropTypes.function,
+  setContent: PropTypes.function,
+  Update: PropTypes.function,
+  CancelSave: PropTypes.function,
+  toggleEditable: PropTypes.function,
+};
+ContentDetail.propTypes = {
+  postData: PropTypes.shape(contentProps).isRequired,
+  editable: PropTypes.bool.isRequired,
+  API: PropTypes.shape(apiProps).isRequired,
+};
+
 export default ContentDetail;

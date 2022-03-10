@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import propTypes from "prop-types";
 import "../css/ShowPersonInfo.css";
 
 const ShowPersonInfo = ({ person }) => {
@@ -31,6 +32,10 @@ const ShowPersonInfo = ({ person }) => {
       </div>
     </div>
   );
+};
+
+ShowPersonInfo.propTypes = {
+  person: propTypes.string.isRequired,
 };
 
 export default ShowPersonInfo;
