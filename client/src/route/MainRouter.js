@@ -6,8 +6,6 @@ import ViewPage from "./ViewPage";
 import ViewContentDetail from "../components/ViewContentDetail";
 import WriteContent from "../components/WriteContent";
 import NotFound from "../components/NotFound";
-// test
-import ReduxTestPage from "./ReduxTestPage";
 
 const MainRouter = () => {
   const MainPage = () => {
@@ -17,9 +15,6 @@ const MainRouter = () => {
     <Switch>
       <Route exact path="/">
         {MainPage}
-      </Route>
-      <Route path="/test">
-        <ReduxTestPage />
       </Route>
 
       <Route path="/Hyunwoong">
