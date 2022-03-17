@@ -1,8 +1,11 @@
 import React from "react";
 import ShowPersonInfo from "../components/ShowPersonInfo";
 
-const ViewPortfoilo = (info) => {
-  const { person } = info;
+type PersonInfo = {
+	person : string;
+};
+
+const ViewPortfoilo = ({person} : PersonInfo) => {
   return (
     <div>
       <ShowPersonInfo person={person} />

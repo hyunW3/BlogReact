@@ -24,9 +24,9 @@ const ContentInList = ({ content, thumbsUp }) => {
   );
 };
 const contentProps = {
-  id: PropTypes.id,
+  id: PropTypes.string,
   title: PropTypes.string,
-  thumbs: PropTypes.int,
+  thumbs: PropTypes.number,
   date: PropTypes.string,
 };
 ContentInList.propTypes = {

@@ -3,18 +3,18 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import propTypes from "prop-types";
 import RootReducer from "./redux/RootReducer";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./css/index.css";
 
-const ReduxWrapper = ({ children }) => {
+type childProp = {
+	children : any,
+};
+
+const ReduxWrapper = ({ children } : childProp ) => {
   const store = createStore(RootReducer, composeWithDevTools());
   return <Provider store={store}> {children} </Provider>;
-};
-ReduxWrapper.propTypes = {
-  children: propTypes.element.isRequired,
 };
 
 ReactDOM.render(

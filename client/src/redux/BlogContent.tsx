@@ -1,4 +1,3 @@
-// import BlogContent, {InitContent, ADDContent } from "../redux/BlogContent"
 const ADD = "ADD";
 const INIT = "INIT";
 const THUMBSUP = "THUMBSUP";
@@ -24,8 +23,18 @@ export const UpdateContent = (id, payload) => ({
 const initialState = {
   contents: [],
 };
-
-export default function BlogContent(state = initialState, action) {
+type dataType = {
+	id : string;
+	title : string;
+	content : string;
+	date : Date;
+	thumbs : number;
+	modified : boolean;
+}
+type contentsType = {
+	contents : dataType[];
+}
+export default function BlogContent(state = initialState, action) : contentsType {
   let payloadFormatted = action.payload;
   if (Array.isArray(action.payload) === false) {
     payloadFormatted = [payloadFormatted];
@@ -38,16 +47,18 @@ export default function BlogContent(state = initialState, action) {
       return { contents: [...state.contents, ...payloadFormatted] };
     case UPDATE:
       return {
-        contents: state.contents.map((data) => {
-          if (data.id === action.id) return action.payload;
+        contents: state.contents.map((data : dataType) : dataType=> {
+		  //const { dataId : string } = data;
+			const dataId : string = data.id;
+          if (dataId === action.id) return action.payload;
           return data;
         }),
       };
     case THUMBSUP:
       return {
-        contents: state.contents.map((data) => {
+        contents: state.contents.map((data : dataType) : dataType => {
           if (data.id === action.id) {
-            const { id, title, content, date, thumbs } = data;
+            const { id, title, content, date, thumbs } : dataType = data;
             return {
               id,
               title,

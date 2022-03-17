@@ -3,6 +3,13 @@
         "browser": true,
         "es2021": true
     },
+	"settings" : {
+		"import/resolver" : {
+			"node" : {
+				"extensions" : [".js",".tsx"]
+			} 
+		}
+	},
     "extends": [
         "plugin:react/recommended",
         "airbnb",
@@ -25,7 +32,9 @@
             {
                 "extensions": [
                     ".js",
-                    ".jsx"
+                    ".jsx",
+					".ts",
+					".tsx"
                 ]
             }
         ],
@@ -45,7 +54,9 @@
 		"spaced-comment" : "warn",
         "import/newline-after-import" : "warn",
 		"react/prop-types" : "warn",
-		"prefer-object-spread" : "warn"
+		"prefer-object-spread" : "warn",
+		"import/no-unresolved" : "warn",
+		"import/extensions" : "off"
     },
     "ignorePatterns": [
         "node_modules/"

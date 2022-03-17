@@ -9,8 +9,8 @@ import NotFound from "../components/NotFound";
 
 const MainRouter = () => {
   const MainPage = () => {
-    return <ViewPage path="/contents" />;
-  };
+    return <ViewPage />;
+  };	
   return (
     <Switch>
       <Route exact path="/">
