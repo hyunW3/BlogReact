@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { dataType } from "../redux/BlogContent";
 
-const ContentDetail = ({ postData, editable, API }) => {
+export type dataTypeWithUndefined = dataType | undefined;
+
+const ContentDetail = ({ postData, editable, API }: ContentDetailPropsType) => {
   return (
     <div key={postData.id}>
       <div>
@@ -64,23 +67,17 @@ const ContentDetail = ({ postData, editable, API }) => {
   );
 };
 
-const contentProps = {
-  id: PropTypes.id,
-  title: PropTypes.string,
-  thumbs: PropTypes.int,
-  date: PropTypes.string,
+type apiProps = {
+  setTitle: (title: string) => void;
+  setContent: (content: dataType) => void;
+  Update: () => void;
+  CancelSave: () => void;
+  toggleEditable: () => void;
 };
-const apiProps = {
-  setTitle: PropTypes.function,
-  setContent: PropTypes.function,
-  Update: PropTypes.function,
-  CancelSave: PropTypes.function,
-  toggleEditable: PropTypes.function,
-};
-ContentDetail.propTypes = {
-  postData: PropTypes.shape(contentProps).isRequired,
-  editable: PropTypes.bool.isRequired,
-  API: PropTypes.shape(apiProps).isRequired,
+type ContentDetailPropsType = {
+  postData: dataTypeWithUndefined;
+  editable: boolean;
+  API: apiProps;
 };
 
 export default ContentDetail;

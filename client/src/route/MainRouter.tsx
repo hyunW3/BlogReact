@@ -7,10 +7,11 @@ import ViewContentDetail from "../components/ViewContentDetail";
 import WriteContent from "../components/WriteContent";
 import NotFound from "../components/NotFound";
 
+const MainPage = () => {
+  return <ViewPage />;
+};
+
 const MainRouter = () => {
-  const MainPage = () => {
-    return <ViewPage />;
-  };	
   return (
     <Switch>
       <Route exact path="/">

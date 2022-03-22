@@ -8,11 +8,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./css/index.css";
 
-type childProp = {
-	children : any,
-};
-
-const ReduxWrapper = ({ children } : childProp ) => {
+const ReduxWrapper = ({ children }): React.ReactElement<React.ReactNode> => {
   const store = createStore(RootReducer, composeWithDevTools());
   return <Provider store={store}> {children} </Provider>;
 };

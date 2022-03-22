@@ -4,7 +4,7 @@ import MainRouter from "./route/MainRouter";
 import Navigation from "./components/Navigation.js";
 import "./css/App.css";
 
-const App = () => {
+const App = (): React.ReactElement => {
   return (
     <div className="App">
       <BrowserRouter>
